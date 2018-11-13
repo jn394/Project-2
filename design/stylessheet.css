@@ -1,10 +1,12 @@
 body {
     background-color: black;
+    background-image: url("connectwork.png");
     color: white;
     font-family: 'Kanit', sans-serif;
 }
 .main {
-    background-color: green;
+    width: 100%;
+   
 }
 /* HEADER */
 #header {
@@ -13,39 +15,69 @@ body {
 
 .title {
     font-family: 'Kanit', sans-serif;
+    font-size: 50px;
     margin: auto;
     fill: transparent;
+
 }
 
 .signInButton {
     position: absolute;
     right: 5%;
+   
     
 }
 
 
 /* MAIN CONTENT */
 .attentionGrabber {
-    background-color: red;
+    /* background-color: red; */
     margin: 5%;
 }
 
 .mainText {
-    font-size: 45px;
-    text-align: center;
+    /* font-size: 45px; */
+width:100%
+;    
+text-align: center;
 }
 
  .startShare {
     width: 50%;
-    margin: 0 25%;
+    margin: 5% 25%;
 } 
 
 
+
+/* Font Icons */
+
+.fas, .far {
+    color: white;
+    font-size: 50px;
+    margin-top: 3%;
+    text-decoration:none
+}
+
+.shareIcon, .scheduleIcon, .servicesIcon {
+color: white;
+text-decoration:none!important;
+box-shadow:none;
+}
+
+.iconWord {
+    color:white;
+}
+/* Hover */
+
+.shareIcon:hover, .scheduleIcon:hover, .servicesIcon:hover {
+    color: black;
+}
 /* Features */
 .features {
-    background-color: blue;
+    
+    background-color: rgb(205,52,71);
     height: 100px;
-    margin: 0 5%;
+  
     text-align: center;
 }
 

@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="stylessheet.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-        crossorigin="anonymous">
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
@@ -39,83 +39,23 @@
         <!-- Center Text -->
         <div class="attentionGrabber ">
             <div class="row">
-                <h2 class="mainText">Don't let them keep you from your favorite shows</h2>
+                <h2 class="mainText">Scheduling</h2>
             </div>
 
-
-            <div class="row">
-
-                <button type="button" class="btn btn-danger startShare">Start Sharing Now!</button>
-            </div>
 
         </div>
 
-
-        <div class="features row">
-            <!-- Three Information buttons -->
-            <div class="col-4">
-                <div><a href="#shareDisplay" class="far fa-handshake shareIcon"></a></div>
-                <div class ="iconWord">Share</div>
-            </div>
-            <div class="col-4">
-                <div><a href="#servicesDisplay" class="fas fa-tv servicesIcon"></a></div>
-                <div class ="iconWord">Services</div>
-            </div>
-            <div class="col-4">
-                <div><a href="#scheduleDisplay" class="far fa-calendar-check scheduleIcon"></a></div>
-                <div class ="iconWord">Schedule</div>
-            </div>
-
-        </div>
 
 
     </div>
 
     <!-- Display When Share is clicked -->
-    <div class="display">
-        <h1>Who We Are</h1>
 
-        <p>At Shareflix, we believe in sharing is caring.
-            What better way is there to share than sharing passwords?
-            A lack of a subscription shouldn't keep you from the latest show to binge.
-
-            <h1>What We Do</h1>
-
-            <p>Our goal is to connect you with peers that have a streaming service you're looking for.
-                All we ask is that you have a subscription to a different service.
-            </p>
-
-
-            <h1>How We Do it</h1>
-
-            <p>Magic. </p>
-
-            <!-- HAve button go to seperate share page explain who we are -->
-
-    </div>
-   
-    <hr>
-
-
-
-
-    <!-- Display When schedule is clicked -->
-    <div id="shareDisplay" class=" display">
-
-
-        <h1>Share</h1>
-
-        <p>EXPLAIN THE PROCESS</p>
-
-        <!-- HAve button go to seperate scheduling page -->
-        <p>See More</p>
-    </div>
+    <!-- Maybe have gifd showing how it works -->
   
 
-
-
     <!-- Display When services is clicked -->
-    <div id="servicesDisplay" class=" display">
+    <div class="servicesDisplay display">
 
         <h1>Services </h1>
         <table class="table table-hover table-dark">
@@ -155,52 +95,21 @@
     </div>
 
     <!-- HAve button go to seperate services page. Explain how application works -->
-    
+    <p>See More</p>
+    <hr>
     <!-- Display When schedule is clicked -->
-    <div id="scheduleDisplay" class=" display">
+    <div class="scheduleDisplay display">
 
 
         <h1>Scheduling</h1>
 
         <p>We offer a scheduling application, where you can reserve times to watch accounts. </p>
-
+        
         <!-- HAve button go to seperate scheduling page -->
         <p>See More</p>
     </div>
 
 
-    <script>
-        // "#shareDisplay"
-// servicesDisplay" 
-
-//hides Display information
-$("#shareDisplay").hide(100);
-$("#servicesDisplay").hide(100);
-$("#scheduleDisplay").hide(100);
-
-//shows Display information on click
-$(".shareIcon").on("click", function() {
-    $("#shareDisplay").show(100);
-    $("#servicesDisplay").hide(100);
-    $("#scheduleDisplay").hide(100);
-    console.log("works")
-});
-
-$(".servicesIcon").on("click", function() {
-    $("#shareDisplay").hide(100);
-    $("#servicesDisplay").show(100);
-    $("#scheduleDisplay").hide(100);
-    console.log("works")
-});
-
-$(".scheduleIcon").on("click", function() {
-    $("#shareDisplay").hide(100);
-    $("#servicesDisplay").hide(100);
-    $("#scheduleDisplay").show(100);
-    console.log("works")
-});
-        
-    </script>
 
 </body>
 
