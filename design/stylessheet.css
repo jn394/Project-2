@@ -1,0 +1,65 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Kanit', sans-serif;
+}
+.main {
+    background-color: green;
+}
+/* HEADER */
+#header {
+    margin-top: 2%;
+}
+
+.title {
+    font-family: 'Kanit', sans-serif;
+    margin: auto;
+    fill: transparent;
+}
+
+.signInButton {
+    position: absolute;
+    right: 5%;
+    
+}
+
+
+/* MAIN CONTENT */
+.attentionGrabber {
+    background-color: red;
+    margin: 5%;
+}
+
+.mainText {
+    font-size: 45px;
+    text-align: center;
+}
+
+ .startShare {
+    width: 50%;
+    margin: 0 25%;
+} 
+
+
+/* Features */
+.features {
+    background-color: blue;
+    height: 100px;
+    margin: 0 5%;
+    text-align: center;
+}
+
+
+th {
+  border-right: solid 1px #f00; 
+  border-left: solid 1px #f00;
+  text-align: center;
+}
+
+hr {
+    background-color: white;
+}
+
+.display {
+    text-align: center;
+}
