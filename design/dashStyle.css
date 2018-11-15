@@ -1,12 +1,25 @@
 body {
     background-color: black;
     background-image: url("connectwork.png");
-    color: white;
+    color: red;
     font-family: 'Kanit', sans-serif;
+}
+
+.navbar-brand {
+    color: red!important;
 }
 .main {
     width: 100%;
    
+}
+
+img {
+    height: 200px;
+   
+}
+
+.card {
+    height: 500px;
 }
 /* HEADER */
 #header {
