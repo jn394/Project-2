@@ -17,28 +17,20 @@ $(document).ready(function () {
     // document.execCommand('copy');
   });
 
+  var input = document.querySelector("input");
+
+  $.get("/api/user_password").then(function (data) {
+    console.log(data);
+
+    $("#test").innerHTML = data.netflix_password;
+  });
+
   $("#passwordID").on("click", function (event) {
     event.preventDefault();
-    $.get("/api/user_password").then(function (data) {
-      console.log(data);
 
-      function copyToClipboard(val) {
-        var dummy = document.createElement("input");
-        document.body.appendChild(dummy);
-        $(dummy).css('display', 'none');
-        dummy.setAttribute("id", "dummy_id");
-        document.getElementById("dummy_id").value = val;
-        dummy.select();
-        document.execCommand("copy");
-        document.body.removeChild(dummy);
-      }
+    document.execCommand("selectAll");
+    document.execCommand("copy");
 
-      copyToClipboard("hello world");
-    });
-
-    // $(this).focus();
-    // $(this).select();
-    // document.execCommand('copy');
   });
 
 });
