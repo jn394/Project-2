@@ -1,9 +1,3 @@
-DROP DATABASE IF EXISTS exampledb;
-CREATE DATABASE exampledb;
-
-DROP DATABASE IF EXISTS testdb;
-CREATE DATABASE testdb;
-
 -- Drops the "Shareflix" Database if it exists currently --
 DROP DATABASE IF EXISTS shareflixDB;
 -- Creates the "Shareflix" database --
@@ -26,7 +20,7 @@ CREATE DATABASE shareflixDB;
       |_User.App.Group Asscoiation _|    
       |         User_ID             |
       |         Group_ID            |
-      |         App_ID              |
+      |                             |
       |_____________________________|
 
 

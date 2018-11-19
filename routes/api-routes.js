@@ -19,9 +19,11 @@ module.exports = function (app) {
   app.post("/api/signup", function (req, res) {
     console.log(req.body);
     db.User.create({
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password,
 
+          
       //Clipboard Password
       netflix_username: req.body.netflix_username,
       netflix_password: req.body.netflix_password
@@ -81,5 +83,21 @@ module.exports = function (app) {
       });
     }
   });
+
+
+  app.post("/api/signUpGroup", function (req, res) {
+    console.log(req.body);
+    db.Group.create({
+      name: req.body.name
+    
+    }).then(function () {
+      res.redirect(303, "/members");
+    }).catch(function (err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
+    });
+  });
+
 
 };

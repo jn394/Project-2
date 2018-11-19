@@ -5,7 +5,7 @@
   <title>ShareFlix</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
@@ -75,6 +75,7 @@
   <section class="bg-light" id="about">
     <div class="container">
       <div class="row">
+
         <!-- ABOUT HEADER -->
         <div class="col-lg-12 text-center">
           <h2 class=" section-headingAbout section-heading text-uppercase">About</h2>
@@ -168,6 +169,7 @@
     
   </section>
 
+
   <!-- TEAM -->
   <section class="bg-light" id="team">
     <div class="container">
@@ -239,7 +241,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+      <div class="col-lg-3 col-md-6">
           <div class="team-member">
             <img class="mx-auto rounded-circle" src="stylesheets/img/teamPics/jay.jpg " alt="Team Member">
             <h4>Jay Ng</h4>
@@ -269,7 +271,6 @@
     </div>
   </section>
 
- 
   <!-- SIGNUP -->
   <section>
     <div class="container" id="signup">
@@ -277,6 +278,10 @@
         <div class="col-md-6 col-md-offset-3">
           <h2>Sign Up Form</h2>
           <form class="signup">
+            <div class="form-group">
+              <label for="exampleInputName">Name</label>
+              <input type="text" class="form-control" id="name-input" placeholder="Input Name">
+            </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <input type="email" class="form-control" id="email-input" placeholder="Email">
@@ -295,9 +300,6 @@
               <label for="exampleInputPassword2">Streaming Password</label>
               <input type="password" class="form-control" id="netflixPW-input" placeholder="Password">
             </div>
-
-            
-
             <div style="display: none" id="alert" class="alert alert-danger" role="alert">
               <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               <span class="sr-only">Error:</span> <span class="msg"></span>
@@ -310,6 +312,7 @@
 <br>
 <br>
             <button type="submit" class="btn btn-danger">Sign Up</button>
+
           </form>
           <br />
           <p>Or log in <a href="/login">here</a></p>

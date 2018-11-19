@@ -7,8 +7,6 @@ body {
   font-family: 'Kanit', sans-serif;
 }
 
-
-
 nav {
   position: fixed;
   left: 0;
@@ -158,7 +156,6 @@ header.masthead .intro-text .intro-heading {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   }
 }
-
 
 .section-headingAbout {
   margin-top: 10px;
