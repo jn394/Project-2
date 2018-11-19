@@ -33,6 +33,37 @@ $(document).ready(function () {
 
   });
 
+// Group Creation Button Functionality / Event Listener
+var groupInput = $("#inputGroupName");
+$("#submitgroup").on("click", function (event) {
+  console.log("submitted!");
+    event.preventDefault();
+    var groupData = {
+    name: groupInput.val().trim()
+        
+  };
+
+  if (!groupData.name) {
+    return console.log ("thats a dumb... name try again!");
+    // TODO  Generate validation saying name is taken or you need to fill it in
+  }
+  // If group name is generated and no issue, 
+
+  signUpGroup(groupData.name);
+  inputGroupName.val("");
+ });
+
+function signUpGroup(name) {
+  $.post("/api/signUpGroup", {
+    name: name
+  }).then(function (data) {
+    window.location.replace(data);
+    Console.log(data);
+    // If there's an error, handle it by throwing up a bootstrap alert
+  }).catch(handleLoginErr);
+}
+
+
 });
 
 // javascript: (function () {
@@ -44,3 +75,5 @@ $(document).ready(function () {
 //   f1("email-input","test@gmail.com");
 //   f1("password-input","1234");
 // })();
+
+

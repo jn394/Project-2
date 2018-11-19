@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define("User", {
     // The email cannot be null, and must be a proper email before creation
     
-    Name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },   
