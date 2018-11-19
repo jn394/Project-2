@@ -1,0 +1,80 @@
+body {
+    font-family: 'Kanit', sans-serif;
+}
+nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  /* NAVBAR */
+  .navbar {
+    background-color: #212529!important;
+    color: rgb(205, 52, 71);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 500;
+  }
+  .navbar-brand {
+   
+    color: rgb(205, 52, 71)!important;
+  }
+  
+  .navbar-brand:hover {
+   
+    color: whitesmoke!important;
+  }
+  
+  #mainNav .navbar-toggler {
+    font-size: 12px;
+    /* right: 0; */
+    /* padding: 13px; */
+    text-transform: uppercase;
+   
+    /* border: 0; */
+    background-color: rgb(205, 52, 71);
+  }
+  
+  #mainNav .navbar-brand {
+    color: rgb(205, 52, 71);
+  }
+  
+  #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
+    color: white;
+  }
+  
+  .nav-item {
+    /* REMOVES DOTS FORM LIST */
+    list-style: none;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link {
+    /* font-size: 90%;
+    font-weight: 400; */
+    /* padding: 0.75em 0; */
+    /* letter-spacing: 1px; */
+    color: rgb(205, 52, 71);
+    
+  }
+  
+  #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: red;
+    text-decoration: none;
+  }
+  
+  @media (min-width: 992px) {
+    #mainNav {
+     
+      border: none;
+      background-color: transparent;
+    }
+   
+  }
+footer {
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  position: fixed;
+  bottom: 0;
+}
