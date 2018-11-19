@@ -9,18 +9,39 @@ body {
 
 
 
+nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
 /* NAVBAR */
-#mainNav {
+.navbar {
   background-color: #212529!important;
+  color: rgb(205, 52, 71);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 500;
+}
+.navbar-brand {
+ 
+  color: rgb(205, 52, 71)!important;
+}
+
+.navbar-brand:hover {
+ 
+  color: whitesmoke!important;
 }
 
 #mainNav .navbar-toggler {
   font-size: 12px;
-  right: 0;
-  padding: 13px;
+  /* right: 0; */
+  /* padding: 13px; */
   text-transform: uppercase;
-  color: white;
-  border: 0;
+ 
+  /* border: 0; */
   background-color: rgb(205, 52, 71);
 }
 
@@ -33,38 +54,39 @@ body {
 }
 
 .nav-item {
+  /* REMOVES DOTS FORM LIST */
   list-style: none;
 }
 #mainNav .navbar-nav .nav-item .nav-link {
-  font-size: 90%;
-  font-weight: 400;
-  padding: 0.75em 0;
-  letter-spacing: 1px;
+  /* font-size: 90%;
+  font-weight: 400; */
+  /* padding: 0.75em 0; */
+  /* letter-spacing: 1px; */
   color: rgb(205, 52, 71);
   
 }
 
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: white;
+  color: red;
   text-decoration: none;
 }
 
 @media (min-width: 992px) {
   #mainNav {
-    padding-top: 25px;
+    /* padding-top: 25px;
     padding-bottom: 25px;
     -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
-    transition: padding-top 0.3s, padding-bottom 0.3s;
+    transition: padding-top 0.3s, padding-bottom 0.3s; */
     border: none;
     background-color: transparent;
   }
   #mainNav .navbar-brand {
-    font-size: 1.75em;
+    /* font-size: 1.75em;
     -webkit-transition: all 0.3s;
-    transition: all 0.3s;
+    transition: all 0.3s; */
   }
   #mainNav .navbar-nav .nav-item .nav-link {
-    padding: 1.1em 1em !important;
+    /* padding: 1.1em 1em !important; */
   }
   #mainNav.navbar-shrink {
     padding-top: 0;
@@ -72,8 +94,8 @@ body {
     background-color: #212529;
   }
   #mainNav.navbar-shrink .navbar-brand {
-    font-size: 1.25em;
-    padding: 12px 0;
+    /* font-size: 1.25em;
+    padding: 12px 0; */
   }
 }
 
@@ -83,8 +105,9 @@ body {
 
 header.masthead {
   text-align: center;
-  color: red;
-background-color: blue;
+  color: #f8f9fa;
+  background-image: url("img/backlit-bright-dawn-697243.jpg");
+  background-image:  grayscale(100%); 
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -112,6 +135,9 @@ header.masthead .intro-text .intro-heading {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+#mainButton {
+  width: 50%;
+}
 @media (min-width: 768px) {
   header.masthead .intro-text {
     padding-top: 300px;
@@ -133,3 +159,83 @@ header.masthead .intro-text .intro-heading {
   }
 }
 
+
+.section-headingAbout {
+  margin-top: 10px;
+}
+
+
+
+/* Font Awesome Icons */
+ .fa-stack-2x {
+  
+  color: rgb(205, 52, 71)!important;
+}
+
+
+
+
+/* TEAM */
+
+#team {
+  background-color:#f8f9fa!important;
+}
+/* TEAM IMG */
+
+.team-member {
+  margin-bottom: 50px;
+  text-align: center;}
+  
+.team-member > h4 {
+    margin-top: 25px;
+    margin-bottom: 0;
+    text-transform: none;
+}
+.team-member > img{
+  width: 225px;
+  height: 225px;
+  border: 7px solid #fff;
+}
+
+.team-member > p { 
+  margin-top:0;
+}
+
+
+/* Social Buttons */
+
+ul.social-buttons {
+  margin-bottom: 0;
+}
+
+ul.social-buttons li a {
+  font-size: 20px;
+  line-height: 50px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  color: white;
+  border-radius: 100%;
+  outline: none;
+  background-color: #212529;
+}
+
+ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
+  background-color: rgb(205, 52, 71);
+}
+
+
+/* RANGES 580 -765 TEAM COLLAPSES ON ITSELF */
+
+/* FOOTER */
+footer {
+ margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.terms {
+  color:black;
+}

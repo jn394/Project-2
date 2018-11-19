@@ -5,47 +5,67 @@
   <title>ShareFlix</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+
+    <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
   <!-- FONT AWESOME -->
   <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+  <!-- Stylesheet -->
   <link href="stylesheets/style.css" rel="stylesheet">
 </head>
 
 <body>
   <!-- NAV BAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark " id="mainNav">
-    <div class="container">
-      <a class="navbar-brand " href="#page-top">ShareFlix</a>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <a class="btn btn-danger " href="login.html"> Sign In</a>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark ">
+    <a class="navbar-brand " href="#page-top">ShareFlix</a>
 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <ul class="navbar-nav text-uppercase ">
-          <li class="nav-item">
-            <a class="nav-link " href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="#services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="#team">Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="#signup">Signup</a>
-          </li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item ">
+          <a class=" nav-link" href="login.html"> Sign In</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link " href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="#services">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="#team">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="#signup">Signup</a>
+        </li>
 
-        </ul>
-      </div>
+      </ul>
+
     </div>
   </nav>
-
 
   <header class="masthead">
     <div class="container">
       <div class="intro-text">
-        <div class="intro-lead-in">Welcome To Our Studio!</div>
-        <div class="intro-heading text-uppercase">It's Nice To Meet You</div>
-        <a class="btn btn-danger btn-xl text-uppercase" href="#signup">Start Sharing</a>
+        <!-- <div class="intro-lead-in">*********** DO WE WANT THIS</div> -->
+        <div class="intro-heading text-uppercase">Content is Meant To Be Shared</div>
+        <a id ="mainButton" class="btn btn-danger btn-xl text-uppercase" href="#signup">Start Sharing</a>
       </div>
     </div>
   </header>
@@ -55,118 +75,51 @@
   <section class="bg-light" id="about">
     <div class="container">
       <div class="row">
+        <!-- ABOUT HEADER -->
         <div class="col-lg-12 text-center">
-          <h2 class="section-heading text-uppercase">About</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+          <h2 class=" section-headingAbout section-heading text-uppercase">About</h2>
+          <h3 class="section-subheading text-muted">We Connect You and Your Streaming Services With Friends and Family</h3>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="">
-            <h4>Kay Garland</h4>
-            <p class="text-muted">Lead Designer</p>
-            <ul class="list-inline social-buttons">
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-twitter"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </li>
-            </ul>
+
+
+<!-- ABOUT CONTENT -->
+      <div class="row text-center">
+          <div class="col-md-4">
+              <span class="fa-stack fa-4x">
+                  <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fas fa-user-alt fa-stack-1x fa-inverse"></i>
+                </span>
+            <h4 class="service-heading">Account Creation</h4>
+            <p class="text-muted">Create a ShareFlix account with a username, password, and your streaming service you wish to share. </p>
           </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="">
-            <h4>Kay Garland</h4>
-            <p class="text-muted">Lead Designer</p>
-            <ul class="list-inline social-buttons">
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-twitter"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </li>
-            </ul>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-sitemap fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Groups</h4>
+            <p class="text-muted">You will then have the option to create a new group or join an existing one if you know the groups password. The ShareFlix Dash will show you which services are availble through your group.</p>
           </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
-            <h4>Larry Parker</h4>
-            <p class="text-muted">Lead Marketer</p>
-            <ul class="list-inline social-buttons">
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-twitter"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt="">
-            <h4>Diana Pertersen</h4>
-            <p class="text-muted">Lead Developer</p>
-            <ul class="list-inline social-buttons">
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-twitter"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </li>
-            </ul>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+              
+            </span>
+            <h4 class="service-heading">Security</h4>
+            <p class="text-muted">At ShareFlix, we do not share any of your information with third party services. Only those in your secure group will have access to the streaming account you have provided</p>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-8 mx-auto text-center">
-          <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam
-            veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+          <p class="large text-muted">DO WE WANT SOMETHING ABOUT THE DASH OR Security here????????</p>
         </div>
       </div>
     </div>
   </section>
-  <hr>
+  
 
   <!-- SERVICES -->
   <section id="services">
@@ -174,39 +127,45 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">Services</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+          <h3 class="section-subheading text-muted">Don't Let the Lack of a Password Keep You From Your Favorite Shows</h3>
         </div>
       </div>
       <div class="row text-center">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <span class="fa-stack fa-4x">
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+            <i class="fas fa-tv fa-stack-1x fa-inverse"></i>
           </span>
-          <h4 class="service-heading">E-Commerce</h4>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto
-            quo inventore harum ex magni, dicta impedit.</p>
+          <h4 class="service-heading">Netflix</h4>
+          <p class="text-muted">Enjoy shows, movies, and original content such as: Stranger Things, Orange is the New Black, and House of Cards.</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <span class="fa-stack fa-4x">
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
             <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
           </span>
-          <h4 class="service-heading">Responsive Design</h4>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto
-            quo inventore harum ex magni, dicta impedit.</p>
+          <h4 class="service-heading">Hulu</h4>
+          <p class="text-muted">Catch up on the Handmaid's Tale, Rick & Morty, Brooklyn Nine-Nine, and your favorite movies.</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <span class="fa-stack fa-4x">
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+            <i class="fas fa-film fa-stack-1x fa-inverse"></i>
           </span>
-          <h4 class="service-heading">Web Security</h4>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto
-            quo inventore harum ex magni, dicta impedit.</p>
+          <h4 class="service-heading">HBO Now</h4>
+          <p class="text-muted">You don't want to miss out on HBO Now's collection of movies and TV shows. Watch anything from Game of Thrones to Dunkirk today.</p>
         </div>
+        <div class="col-md-3">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-music fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Spotify</h4>
+            <p class="text-muted">Skip as often as you like and avoid annoying ads with a shared Spotify account.</p>
+          </div>
       </div>
     </div>
+    
   </section>
 
   <!-- TEAM -->
@@ -214,101 +173,86 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+          <h2 class="section-heading text-uppercase">The ShareFlix Team</h2>
           <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-lg-3 col-md-6">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="">
-            <h4>Kay Garland</h4>
-            <p class="text-muted">Lead Designer</p>
+            <img class="mx-auto rounded-circle" src="stylesheets/img/teamPics/Iain.jpg " alt="Team Member">
+            <h4>Tim Fisher</h4>
+            <p class="text-muted">POSITION</p>
             <ul class="list-inline social-buttons">
+              
               <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-twitter"></i>
+                <a target = "_blank" href="https://github.com/FlSHBONES">
+                  <i class="fab fa-github"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
+                <a target = "_blank" href="#">
                   <i class="fab fa-linkedin-in"></i>
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-lg-3 col-md-6">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="">
-            <h4>Kay Garland</h4>
-            <p class="text-muted">Lead Designer</p>
+            <img class="mx-auto rounded-circle" src="stylesheets/img/teamPics/Iain.jpg " alt="Team Member">
+            <h4>Iain Gillespie</h4>
+            <p class="text-muted">POSITION</p>
             <ul class="list-inline social-buttons">
               <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-twitter"></i>
+                <a target = "_blank" href="#">
+                  <i class="fab fa-github"></i>
                 </a>
               </li>
+              
               <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
+                <a target = "_blank" href="https://www.linkedin.com/in/iaindgillespie/">
                   <i class="fab fa-linkedin-in"></i>
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-lg-3 col-md-6">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
-            <h4>Larry Parker</h4>
-            <p class="text-muted">Lead Marketer</p>
+            <img class="mx-auto rounded-circle" src="stylesheets/img/teamPics/john.jpg " alt="Team Member">
+            <h4>John Lombard</h4>
+            <p class="text-muted">POSITION</p>
             <ul class="list-inline social-buttons">
               <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-twitter"></i>
+                <a target = "_blank" href="https://github.com/johnlombard">
+                  <i class="fab fa-github"></i>
                 </a>
               </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
+     
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a target = "_blank" href="https://www.linkedin.com/in/johnlombard1996/">
                   <i class="fab fa-linkedin-in"></i>
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-lg-3 col-md-6">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt="">
-            <h4>Diana Pertersen</h4>
-            <p class="text-muted">Lead Developer</p>
+            <img class="mx-auto rounded-circle" src="stylesheets/img/teamPics/jay.jpg " alt="Team Member">
+            <h4>Jay Ng</h4>
+            <p class="text-muted">POSITION</p>
             <ul class="list-inline social-buttons">
               <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-twitter"></i>
+                <a target = "_blank" href="https://github.com/jn394">
+                  <i class="fab fa-github"></i>
                 </a>
               </li>
+              
               <li class="list-inline-item">
-                <a href="#">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
+                <a target = "_blank" href="https://www.linkedin.com/in/junwah-ng-9691b736/">
                   <i class="fab fa-linkedin-in"></i>
                 </a>
               </li>
@@ -325,8 +269,7 @@
     </div>
   </section>
 
-  <hr>
-
+ 
   <!-- SIGNUP -->
   <section>
     <div class="container" id="signup">
@@ -345,19 +288,28 @@
 
             <!-- Clipboard Password -->
             <div class="form-group">
-              <label for="exampleInputUsername1">Netflix Username</label>
+              <label for="exampleInputUsername1">Streaming Username</label>
               <input type="username" class="form-control" id="netflixUN-input" placeholder="Username">
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword2">Netflix Password</label>
+              <label for="exampleInputPassword2">Streaming Password</label>
               <input type="password" class="form-control" id="netflixPW-input" placeholder="Password">
             </div>
+
+            
 
             <div style="display: none" id="alert" class="alert alert-danger" role="alert">
               <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               <span class="sr-only">Error:</span> <span class="msg"></span>
             </div>
-            <button type="submit" class="btn btn-default">Sign Up</button>
+            
+            <input type="radio"> Netflix
+            <input type="radio"> Hulu
+            <input type="radio"> HBO Now
+            <input type="radio"> Spotify
+<br>
+<br>
+            <button type="submit" class="btn btn-danger">Sign Up</button>
           </form>
           <br />
           <p>Or log in <a href="/login">here</a></p>
@@ -373,34 +325,16 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <span class="copyright">Copyright &copy; Your Website 2018</span>
+          <span class="copyright">Copyright &copy; ShareFlix 2018</span>
         </div>
-        <div class="col-md-4">
-          <ul class="list-inline social-buttons">
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+       
         <div class="col-md-4">
           <ul class="list-inline quicklinks">
             <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
+              <a class ="terms" href="#">Privacy Policy</a>
             </li>
             <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
+              <a class ="terms" href="#">Terms of Use</a>
             </li>
           </ul>
         </div>
