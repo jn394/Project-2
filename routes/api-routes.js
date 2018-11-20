@@ -21,13 +21,7 @@ module.exports = function (app) {
     db.User.create({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
-
-          
-      //Clipboard Password
-      netflix_username: req.body.netflix_username,
-      netflix_password: req.body.netflix_password
-      
+      password: req.body.password
     }).then(function () {
       res.redirect(307, "/api/login");
     }).catch(function (err) {
@@ -59,37 +53,11 @@ module.exports = function (app) {
     }
   });
 
-  //Clipboard Password
-  app.get("/api/user_username", function (req, res) {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    }
-    else {
-      res.json({
-        netflix_username: req.user.netflix_username,
-      });
-    }
-  });
-
-  app.get("/api/user_password", function (req, res) {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    }
-    else {
-      res.json({
-        netflix_password: req.user.netflix_password,
-      });
-    }
-  });
-
-
   app.post("/api/signUpGroup", function (req, res) {
     console.log(req.body);
     db.Group.create({
       name: req.body.name
-    
+
     }).then(function () {
       res.redirect(303, "/members");
     }).catch(function (err) {
@@ -98,6 +66,50 @@ module.exports = function (app) {
       // res.status(422).json(err.errors[0].message);
     });
   });
+
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+  // Join Group Code
+
+  // Join Group Button
+  app.get("/api/group_join", function (req, res) {
+    db.Group.findAll({}).then(function (data) {
+      res.json(data);
+    });
+  });
+
+  // Modal Search Button
+  app.get("/api/group_join/:group_name", function (req, res) {
+    db.Group.findAll({
+      where: {
+        name: req.params.group_name
+      }
+    }).then(function (data) {
+      res.json(data);
+    });
+  });
+
+  // Join A Group Button
+  app.post("/api/usergroup", function (req, res) {
+    console.log(req.body);
+    console.log("END OF REQUEST!!!!!!!!")
+    db.Usergroup.create({
+      GroupId: req.body.GroupId,
+      UserId: req.body.UserId,
+      Pending: true,
+      Admin: false
+    }).then(function (data) {
+      console.log(data);
+      console.log("YOU HAVE JOINED THE GROUP");
+      res.send(data);
+    }).catch(function (err) {
+      console.log(err);
+      res.json(err);
+    });
+  });
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 };

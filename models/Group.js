@@ -3,11 +3,26 @@ module.exports = function (sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-        }
-    // body: {
-    //   type: DataTypes.TEXT,
-    //   allowNull: true
-    // }
+    },
+    body: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------
+    // Join Group Code
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'beginTime',
+      defaultValue: sequelize.literal('NOW()'),
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'beginTime',
+      defaultValue: sequelize.literal('NOW()'),
+    }
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
   });
 
   // Group.associate = function (models) {
