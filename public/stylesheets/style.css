@@ -15,22 +15,49 @@ nav {
 }
 /* NAVBAR */
 .navbar {
-  background-color: #212529!important;
+  background-color: transparent;
   color: rgb(205, 52, 71);
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
+  transition: 0.4s;
   z-index: 500;
 }
+
+/* Brand */
 .navbar-brand {
- 
+ font-size: 30px;
   color: rgb(205, 52, 71)!important;
+  
+  
 }
 
+/* SHRINKS NAVBAR */
+nav.navbar.shrink {
+background-color:#212529!important;
+   
+    margin: 0px 15px 8px 0;
+    padding: 4px 5px; 
+  
+}
+/* Responsive background color */
+@media (max-width: 999px) {
+  nav.navbar {
+    background-color:#212529!important;
+      
+        margin: 0px 15px 8px 0;
+        padding: 4px 5px; 
+      
+    }
+}
+
+
+/* Changes color when hovering brand */
 .navbar-brand:hover {
  
-  color: whitesmoke!important;
+  color: rgb(198, 199, 200)!important;
+  
 }
 
 #mainNav .navbar-toggler {
@@ -43,8 +70,20 @@ nav {
   background-color: rgb(205, 52, 71);
 }
 
+/* Brand color */
 #mainNav .navbar-brand {
   color: rgb(205, 52, 71);
+}
+
+/* Nav color */
+.nav-link {
+  color: rgb(205, 52, 71)!important;
+  
+}
+/* Nav link hover color */
+.nav-link:hover {
+ 
+  color: rgb(198, 199, 200)!important;
 }
 
 #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
@@ -55,13 +94,10 @@ nav {
   /* REMOVES DOTS FORM LIST */
   list-style: none;
 }
+
+
 #mainNav .navbar-nav .nav-item .nav-link {
-  /* font-size: 90%;
-  font-weight: 400; */
-  /* padding: 0.75em 0; */
-  /* letter-spacing: 1px; */
   color: rgb(205, 52, 71);
-  
 }
 
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
@@ -69,22 +105,24 @@ nav {
   text-decoration: none;
 }
 
+
+
 @media (min-width: 992px) {
   #mainNav {
-    /* padding-top: 25px;
+    padding-top: 25px;
     padding-bottom: 25px;
     -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
-    transition: padding-top 0.3s, padding-bottom 0.3s; */
+    transition: padding-top 0.3s, padding-bottom 0.3s;
     border: none;
     background-color: transparent;
   }
   #mainNav .navbar-brand {
-    /* font-size: 1.75em;
+    font-size: 1.75em;
     -webkit-transition: all 0.3s;
-    transition: all 0.3s; */
+    transition: all 0.3s;
   }
   #mainNav .navbar-nav .nav-item .nav-link {
-    /* padding: 1.1em 1em !important; */
+    padding: 1.1em 1em !important;
   }
   #mainNav.navbar-shrink {
     padding-top: 0;
@@ -92,15 +130,15 @@ nav {
     background-color: #212529;
   }
   #mainNav.navbar-shrink .navbar-brand {
-    /* font-size: 1.25em;
-    padding: 12px 0; */
+    font-size: 1.25em;
+    padding: 12px 0;
   }
 }
 
 
 
 /* WELCOME */
-
+/* Header  */
 header.masthead {
   text-align: center;
   color: #f8f9fa;
@@ -132,10 +170,16 @@ header.masthead .intro-text .intro-heading {
   margin-bottom: 25px;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
+/* Heading background */
+.intro-heading {
+  text-shadow: 2px 2px rgb(205, 52, 71);
+}
 
+/* Start sharing now button */
 #mainButton {
   width: 50%;
 }
+/* Responsive Welcome */
 @media (min-width: 768px) {
   header.masthead .intro-text {
     padding-top: 300px;
@@ -157,6 +201,7 @@ header.masthead .intro-text .intro-heading {
   }
 }
 
+/* Section headings positioning */
 .section-headingAbout {
   margin-top: 10px;
 }
@@ -224,7 +269,6 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 }
 
 
-/* RANGES 580 -765 TEAM COLLAPSES ON ITSELF */
 
 /* FOOTER */
 footer {

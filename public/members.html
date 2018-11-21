@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Passport Authentication</title>
+  <title>ShareFlix</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -48,7 +48,7 @@
   <!-- SIGN UP BUTTON  -->
   <div class="row" id="signUpBtn">
     <button type="button" id="signUpBtn" class="btn btn-secondary" data-toggle="modal" data-target="#signInModal">
-      New? Click here to Sign Up!
+      New? Click here to Create a Group!
     </button>
   </div>
 
@@ -81,7 +81,7 @@
         <!-- MODAL FOOTER -->
         <div class="modal-footer">
           <!-- SUBMIT BUTTON -->
-          <button type="submit" class="btn btn-primary" id="submitgroup" data-dismiss="modal">Submit</button>
+          <button type="submit" class="btn btn-danger" id="submitgroup" data-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -177,7 +177,7 @@
   <div id="displayGroup"></div>
 
   <!-- Button trigger modal -->
-  <button id="joinGroupBTN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#groupSearch-Modal">
+  <button id="joinGroupBTN" type="button" class="btn btn-danger" data-toggle="modal" data-target="#groupSearch-Modal">
     Join A Group
   </button>
 
@@ -196,7 +196,7 @@
           <nav class="navbar navbar-light bg-light">
             <form class="form-inline">
               <input id="groupSearch-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button id="groupSearchBTN" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <button id="groupSearchBTN" class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
             </form>
           </nav>
           <h4>Groups:</h4>
