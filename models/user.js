@@ -5,12 +5,12 @@ var bcrypt = require("bcrypt-nodejs");
 module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define("User", {
     // The email cannot be null, and must be a proper email before creation
-    
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },   
-    
+    },
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -23,21 +23,9 @@ module.exports = function (sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-
-
-    //Clipboard Password
-    netflix_username: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    netflix_password: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
 
   });
-
 
   User.associate = function (models) {
     // Associating User with Apps
@@ -47,32 +35,10 @@ module.exports = function (sequelize, DataTypes) {
     });
   };
 
-  //CODE I ADDED
   User.associate = function (models) {
-    // Associating User with Apps
-    // When an User is deleted, also delete any associated Posts
-    User.hasMany(models.Usergroup, {
-      onDelete: "cascade"
-    });
+
+    User.belongsToMany(models.Group, { through: 'Usergroup' });
   };
-
-  // User.associate = function (models) {
-  //   // Associating User with Groups
-  //   // When an User is deleted, also delete any associated Groups (if admin)  Might get rid of this function because we changed gears to tie one user to one group.
-  //   User.hasMany(models.tGroup, {
-  //     onDelete: "cascade"
-  //   });
-  // };
-
-  // User.associate = function (models) {
-
-  //   User.belongsTo(models.Group, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
-  // Author is analagous to the User and instead of just Posts, they also have SharedApps under var Shared.
 
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function (password) {
