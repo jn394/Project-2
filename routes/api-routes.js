@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+var Sequelize = require("sequelize");
+var Op = Sequelize.Op;
 
 module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -73,7 +75,13 @@ module.exports = function (app) {
 
   // Join Group Button
   app.get("/api/group_join", function (req, res) {
-    db.Group.findAll({}).then(function (data) {
+    db.Group.findAll({
+      include: [
+        {
+          model: db.User
+        }
+      ]
+    }).then(function (data) {
       res.json(data);
     });
   });
@@ -82,8 +90,15 @@ module.exports = function (app) {
   app.get("/api/group_join/:group_name", function (req, res) {
     db.Group.findAll({
       where: {
-        name: req.params.group_name
-      }
+        name: {
+          [Op.like]: "%" + req.params.group_name + "%"
+        }
+      },
+      include: [
+        {
+          model: db.User
+        }
+      ]
     }).then(function (data) {
       res.json(data);
     });
