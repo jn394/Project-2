@@ -55,23 +55,29 @@ $(document).ready(function () {
     event.preventDefault();
     $("#searchResults").empty();
     console.log("Clicked Join Group!!!");
+
     $.get("/api/group_join").then(function (data) {
       console.log(data);
+
       for (var i = 0; i < data.length; i++) {
 
-        //List View
-        // $("#searchResults").append(
-        //   "<div><h5>Group #: " + data[i].id + "<br>" +
-        //   "Group Name: " + data[i].name + "<br>" +
-        //   "Group Body: " + data[i].body +
-        //   "</div>" +
-        //   //Join A Group Button
-        //   "<button class='joinAGroupBTN btn btn-success' data-dismiss='modal' data-groupID=" + data[i].id + " type='button'>+ Join</button>" +
-        //   "<hr>");
+        console.log(data[i]);
+        var members = data[i].Users;
+        var listOfMembers = [];
 
-        // Cards View
-        $("#searchResults").append(createNewRow(data[i]));
+        for (var j = 0; j < members.length; j++) {
+          listOfMembers.push(members[j].name);
+        };
 
+        $("#searchResults").append(
+          "<div><h5>Group #: " + data[i].id + "<br>" +
+          "Group Name: " + data[i].name + "<br>" +
+          "Group Body: " + data[i].body + "<br>" +
+          "Users In Group: " + listOfMembers +
+          "</div>" +
+          //Join A Group Button
+          "<button class='joinAGroupBTN btn btn-success' data-dismiss='modal' data-groupID=" + data[i].id + " type='button'>+ Join</button>" +
+          "<hr>");
       };
     });
   });
@@ -87,6 +93,23 @@ $(document).ready(function () {
       console.log(data);
       for (var i = 0; i < data.length; i++) {
         //Put either List View or Card View
+        console.log(data[i]);
+        var members = data[i].Users;
+        var listOfMembers = [];
+
+        for (var j = 0; j < members.length; j++) {
+          listOfMembers.push(members[j].name);
+        };
+
+        $("#searchResults").append(
+          "<div><h5>Group #: " + data[i].id + "<br>" +
+          "Group Name: " + data[i].name + "<br>" +
+          "Group Body: " + data[i].body + "<br>" +
+          "Users In Group: " + listOfMembers +
+          "</div>" +
+          //Join A Group Button
+          "<button class='joinAGroupBTN btn btn-success' data-dismiss='modal' data-groupID=" + data[i].id + " type='button'>+ Join</button>" +
+          "<hr>");
       };
     });
   });
@@ -122,41 +145,41 @@ $(document).ready(function () {
   };
 
   // Function for creating a row for groups
-  function createNewRow(group) {
+  // function createNewRow(group) {
 
-    //Setting Up the Card
-    var newGroupCard = $("<div>");
-    newGroupCard.addClass("card");
-    var newGroupCardHeading = $("<div>");
-    newGroupCardHeading.addClass("card-header");
-    var newGroupTitle = $("<h5>");
-    var newGroupCardBody = $("<div>");
-    newGroupCardBody.addClass("card-body");
-    var newGroupBody = $("<p>");
+  //   //Setting Up the Card
+  //   var newGroupCard = $("<div>");
+  //   newGroupCard.addClass("card");
+  //   var newGroupCardHeading = $("<div>");
+  //   newGroupCardHeading.addClass("card-header");
+  //   var newGroupTitle = $("<h5>");
+  //   var newGroupCardBody = $("<div>");
+  //   newGroupCardBody.addClass("card-body");
+  //   var newGroupBody = $("<p>");
 
-    //Join A Group Button
-    var joinBTN = $("<button>");
-    joinBTN.attr('class', 'joinAGroupBTN');
-    joinBTN.attr('data-dismiss', 'modal');
-    joinBTN.attr('data-groupID', group.id);
-    joinBTN.text("+ Join");
-    joinBTN.addClass("btn btn-success");
-    joinBTN.css({
-      float: "right",
-      "margin-top": "-5px"
-    });
+  //   //Join A Group Button
+  //   var joinBTN = $("<button>");
+  //   joinBTN.attr('class', 'joinAGroupBTN');
+  //   joinBTN.attr('data-dismiss', 'modal');
+  //   joinBTN.attr('data-groupID', group.id);
+  //   joinBTN.text("+ Join");
+  //   joinBTN.addClass("btn btn-success");
+  //   joinBTN.css({
+  //     float: "right",
+  //     "margin-top": "-5px"
+  //   });
 
-    //Adding Into the Card
-    newGroupTitle.text(group.name + " ");
-    newGroupCardHeading.append(joinBTN);
-    newGroupCardHeading.append(newGroupTitle);
-    newGroupBody.text(group.body);
-    newGroupCardBody.append(newGroupBody);
-    newGroupCard.append(newGroupCardHeading);
-    newGroupCard.append(newGroupCardBody);
-    newGroupCard.data("Group", group);
-    return newGroupCard;
-  };
+  //   //Adding Into the Card
+  //   newGroupTitle.text(group.name + " ");
+  //   newGroupCardHeading.append(joinBTN);
+  //   newGroupCardHeading.append(newGroupTitle);
+  //   newGroupBody.text(group.body);
+  //   newGroupCardBody.append(newGroupBody);
+  //   newGroupCard.append(newGroupCardHeading);
+  //   newGroupCard.append(newGroupCardBody);
+  //   newGroupCard.data("Group", group);
+  //   return newGroupCard;
+  // };
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -224,7 +247,7 @@ function handleLoginErr(err) {
   // ---------------------------------------------------------------//
 
 
-  
+
 });
 
 
