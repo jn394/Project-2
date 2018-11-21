@@ -33,19 +33,46 @@ $(document).ready(function () {
     // If group name is generated and no issue, 
 
     signUpGroup(groupData.name);
-    inputGroupName.val("");
+    signUpUsergroup();
   });
 
   function signUpGroup(name) {
     $.post("/api/signUpGroup", {
       name: name
     }).then(function (data) {
-      window.location.replace(data);
-      Console.log(data);
+      console.log(data);
+       // Need this for the "joinAGroupBTN" post request
+    $("#group-id").text(data.id);
+    $("#group-id").attr("value", data.id);
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
+
+    
   }
 
+  function signUpUsergroup(){
+    $(document).on("click", "#submitgroup", function () {
+      console.log("You are now the Group Admin!!");
+  
+
+      var usergroup_data = {
+        GroupID: $("#group-id").attr("value"),
+        UserID: $("#member-id").attr("value")
+      };
+  
+      $.post("/api/signUpUsergroup", {
+        GroupId: usergroup_data.GroupID,
+        UserId: usergroup_data.UserID
+      }).then(function (data) {
+        console.log("Group that you joined: ");
+        console.log(data);
+        $("#displayGroup").append("\n  AYYYY!! You have Made the Group: " + data.GroupId);
+        // $("#joinGroupBTN").hide();
+  
+        // If there's an error, handle it by throwing up a bootstrap alert
+      }).catch(handleLoginErr);
+    })
+  };
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
   // Join Group Code

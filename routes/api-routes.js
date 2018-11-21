@@ -57,17 +57,37 @@ module.exports = function (app) {
 
   app.post("/api/signUpGroup", function (req, res) {
     console.log(req.body);
+    console.log("Not User Group");
     db.Group.create({
       name: req.body.name
 
-    }).then(function () {
-      res.redirect(303, "/members");
+    }).then(function (data) {
+      res.json(data);
     }).catch(function (err) {
       console.log(err);
       res.json(err);
       // res.status(422).json(err.errors[0].message);
     });
   });
+
+  app.post("/api/signUpUsergroup", function (req, res) {
+    console.log(req.body);
+    console.log("END OF REQUEST!!!!!!!!")
+    db.Usergroup.create({
+      GroupId: req.body.GroupId,
+      UserId: req.body.UserId,
+      Pending: false,
+      Admin: true
+    }).then(function (data) {
+      console.log(data);
+      console.log("YOU HAVE CREATED A GROUP, YOU ADMIN YOU!");
+      res.send(data);
+    }).catch(function (err) {
+      console.log(err);
+      res.json(err);
+    });
+  });
+
 
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
