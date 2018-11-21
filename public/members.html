@@ -29,8 +29,38 @@
   </div>
 
 
+  <br>
+
 
   <!-- Group Creation -->
+  <div class="form-group">
+    <label for="exampleInputUsername1">Streaming Username</label>
+    <input type="username" class="form-control" id="appUN-input" placeholder="Username">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword2">Streaming Password</label>
+    <input type="password" class="form-control" id="appPW-input" placeholder="Password">
+  </div>
+  <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span> <span class="msg"></span>
+  </div>
+  
+
+  <!-- Made radio buttons exclusive -->
+
+  <div class="radio">
+    <label><input type="radio" id="netflix" name="serviceinput" value="Netflix" checked>Netflix</label>
+  </div>
+  <div class="radio">
+    <label><input type="radio" id="hulu" name="serviceinput" value="Hulu">Hulu</label>
+  </div>
+  <div class="radio">
+    <label><input type="radio" id="spotify" name="serviceinput" value="Spotify">Spotify</label>
+  </div>
+  <div class="radio">
+    <label><input type="radio" id="hbo" name="serviceinput" value="HBO" >HBO Now</label>
+  </div>
 
 
   <!-- Button to call up Modal for Group detail information -->
@@ -43,7 +73,9 @@
 
   <!-- Actual submit modal for said information ID=CreateGroup-->
 
+  <button type="submit" id="subscriptionsubmit" class="btn btn-danger">Add</button>
 
+  <br><br>
 
   <!-- SIGN UP BUTTON  -->
   <div class="row" id="signUpBtn">

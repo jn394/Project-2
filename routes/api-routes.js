@@ -108,7 +108,27 @@ module.exports = function (app) {
     });
   });
 
-  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+  // ----------------------------  ------------------------------------------------------------------------------------------------------------------------
+
+  // ADD AN APP ROUTE -----//
+
+
+app.post("/api/addapp", function (req, res) {
+  console.log(req.body);
+  db.App.create({
+    App_name: req.body.app,
+    AppUsername: req.body.username,
+    AppPassword: req.body.password,
+    UserId: req.body.UserId
+     
+  }).then(function () {
+    res.redirect(307, "/api/login");
+  }).catch(function (err) {
+    console.log(err);
+    res.json(err);
+    // res.status(422).json(err.errors[0].message);
+  });
+});
 
 
 

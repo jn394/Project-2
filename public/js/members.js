@@ -1,6 +1,8 @@
 $(document).ready(function () {
   // This file just does a GET request to figure out which user is logged in
-  // and updates the HTML on the page
+  // and updates the HTML on the page  
+
+
   $.get("/api/user_data").then(function (data) {
     $(".member-name").text(data.email);
 
@@ -159,6 +161,67 @@ $(document).ready(function () {
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+  // -------------------  ADD A SERVICE LOGIC -----------------------//
+
+  // $(document).on("click", "button.joinAGroupBTN", function () {
+  $("#subscriptionsubmit").on("click", function (event) {
+    event.preventDefault();
+   
+    console.log("clicked add!!")
+
+    var appName = ""
+
+    // Logic to determne which service has been clicked ... annoying coudlnt use .val for this but was the only way i could get it working //
+
+    if ($('#netflix').is(":checked") ){
+      appName = "Netflix";
+    }else if ($('#hulu').is(":checked")){
+      appName = "Hulu"
+    }else if ($('#spotify').is(":checked")){
+      appName = "Spotify"
+    }else if ($('#hbo').is(":checked")){
+      appName = "HBO"};
+
+
+console.log(appName, "App name ------");
+
+
+var appData = {
+    app_username: $("#appUN-input").val().trim(),
+    app_password: $("#appPW-input").val().trim(),
+    app: appName
+
+  };
+
+  console.log(appData)
+
+  // GET REQUEST TO Get AppName so we can run logic to check if already has netflix
+
+  checkApp()
+
+  addApp(appData.app, appData.app_username, appData.app_password, $("#member-id").attr("value") )
+
+});
+
+function addApp(app, username, password, id) {
+  $.post("/api/addapp", {
+    app: app,
+    username: username,
+    password: password,
+    UserId: id
+  }).then(function (data) {
+    console.log(data)
+    // If there's an error, handle it by throwing up a bootstrap alert
+  }).catch(handleLoginErr);
+}
+
+function handleLoginErr(err) {
+  $("#alert .msg").text(err.responseJSON);
+  $("#alert").fadeIn(500);
+}
+
+
+  // ---------------------------------------------------------------//
 
 
   

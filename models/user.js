@@ -29,11 +29,11 @@ module.exports = function (sequelize, DataTypes) {
     //Clipboard Password
     netflix_username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     netflix_password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
 
   });
