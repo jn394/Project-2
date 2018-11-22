@@ -143,28 +143,68 @@ module.exports = function (app) {
     });
   });
 
-  // ----------------------------  ------------------------------------------------------------------------------------------------------------------------
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
   // ADD AN APP ROUTE -----//
 
 
-app.post("/api/addapp", function (req, res) {
-  console.log(req.body);
-  db.App.create({
-    App_name: req.body.app,
-    AppUsername: req.body.username,
-    AppPassword: req.body.password,
-    UserId: req.body.UserId
-     
-  }).then(function () {
-    res.redirect(307, "/api/login");
-  }).catch(function (err) {
-    console.log(err);
-    res.json(err);
-    // res.status(422).json(err.errors[0].message);
+  app.post("/api/addapp", function (req, res) {
+    console.log(req.body);
+    db.App.create({
+      App_name: req.body.app,
+      AppUsername: req.body.username,
+      AppPassword: req.body.password,
+      UserId: req.body.UserId
+
+    }).then(function () {
+      res.redirect(307, "/api/login");
+    }).catch(function (err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
+    });
   });
-});
 
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+  // Add Pending Users
+
+  // Getting Pending Users
+  app.get("/api/pending_users/:GroupId", function (req, res) {
+    db.Usergroup.findAll({
+      where: {
+        GroupId: req.params.GroupId,
+        Pending: true
+      }
+    }).then(function (data) {
+      res.json(data);
+    });
+  });
+
+  // Displaying Pending Users
+  app.get("/api/display_pendingUsers/:id", function (req, res) {
+    db.User.findAll({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (data) {
+      res.json(data);
+    });
+  });
+
+  //Approving User
+  app.put("/api/approve_user", function (req, res) {
+    db.Usergroup.update(
+      { Pending: false }, {
+        where: {
+          UserId: req.body.UserId,
+          GroupId: req.body.GroupId
+        }
+      }).then(function (data) {
+        res.json(data);
+      });
+  });
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 };
