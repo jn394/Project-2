@@ -33,7 +33,7 @@ $(document).ready(function () {
     // If group name is generated and no issue, 
 
     signUpGroup(groupData.name);
-    signUpUsergroup();
+    // signUpUsergroup();
   });
 
   function signUpGroup(name) {
@@ -41,37 +41,38 @@ $(document).ready(function () {
       name: name
     }).then(function (data) {
       console.log(data);
-       // Need this for the "joinAGroupBTN" post request
-    $("#group-id").text(data.id);
-    $("#group-id").attr("value", data.id);
+      // Need this for the "joinAGroupBTN" post request
+      $("#group-id").text(data.id);
+      $("#group-id").attr("value", data.id);
+      signUpUsergroup();
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
 
-    
+
   }
 
-  function signUpUsergroup(){
-    $(document).on("click", "#submitgroup", function () {
-      console.log("You are now the Group Admin!!");
-  
+  function signUpUsergroup() {
+    // $(document).on("click", "#submitgroup", function () {
+    console.log("You are now the Group Admin!!");
 
-      var usergroup_data = {
-        GroupID: $("#group-id").attr("value"),
-        UserID: $("#member-id").attr("value")
-      };
-  
-      $.post("/api/signUpUsergroup", {
-        GroupId: usergroup_data.GroupID,
-        UserId: usergroup_data.UserID
-      }).then(function (data) {
-        console.log("Group that you joined: ");
-        console.log(data);
-        $("#displayGroup").append("\n  AYYYY!! You have Made the Group: " + data.GroupId);
-        // $("#joinGroupBTN").hide();
-  
-        // If there's an error, handle it by throwing up a bootstrap alert
-      }).catch(handleLoginErr);
-    })
+
+    var usergroup_data = {
+      GroupID: $("#group-id").attr("value"),
+      UserID: $("#member-id").attr("value")
+    };
+
+    $.post("/api/signUpUsergroup", {
+      GroupId: usergroup_data.GroupID,
+      UserId: usergroup_data.UserID
+    }).then(function (data) {
+      console.log("Group that you joined: ");
+      console.log(data);
+      $("#displayGroup").append("\n  AYYYY!! You have Made the Group: " + data.GroupId);
+      // $("#joinGroupBTN").hide();
+
+      // If there's an error, handle it by throwing up a bootstrap alert
+    }).catch(handleLoginErr);
+    // })
   };
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -216,62 +217,118 @@ $(document).ready(function () {
   // $(document).on("click", "button.joinAGroupBTN", function () {
   $("#subscriptionsubmit").on("click", function (event) {
     event.preventDefault();
-   
+
     console.log("clicked add!!")
 
     var appName = ""
 
     // Logic to determne which service has been clicked ... annoying coudlnt use .val for this but was the only way i could get it working //
 
-    if ($('#netflix').is(":checked") ){
+    if ($('#netflix').is(":checked")) {
       appName = "Netflix";
-    }else if ($('#hulu').is(":checked")){
+    } else if ($('#hulu').is(":checked")) {
       appName = "Hulu"
-    }else if ($('#spotify').is(":checked")){
+    } else if ($('#spotify').is(":checked")) {
       appName = "Spotify"
-    }else if ($('#hbo').is(":checked")){
-      appName = "HBO"};
+    } else if ($('#hbo').is(":checked")) {
+      appName = "HBO"
+    };
 
 
-console.log(appName, "App name ------");
+    console.log(appName, "App name ------");
 
 
-var appData = {
-    app_username: $("#appUN-input").val().trim(),
-    app_password: $("#appPW-input").val().trim(),
-    app: appName
+    var appData = {
+      app_username: $("#appUN-input").val().trim(),
+      app_password: $("#appPW-input").val().trim(),
+      app: appName
 
-  };
+    };
 
-  console.log(appData)
+    console.log(appData)
 
-  // GET REQUEST TO Get AppName so we can run logic to check if already has netflix
+    // GET REQUEST TO Get AppName so we can run logic to check if already has netflix
 
-  checkApp()
+    checkApp()
 
-  addApp(appData.app, appData.app_username, appData.app_password, $("#member-id").attr("value") )
+    addApp(appData.app, appData.app_username, appData.app_password, $("#member-id").attr("value"))
 
-});
+  });
 
-function addApp(app, username, password, id) {
-  $.post("/api/addapp", {
-    app: app,
-    username: username,
-    password: password,
-    UserId: id
-  }).then(function (data) {
-    console.log(data)
-    // If there's an error, handle it by throwing up a bootstrap alert
-  }).catch(handleLoginErr);
-}
+  function addApp(app, username, password, id) {
+    $.post("/api/addapp", {
+      app: app,
+      username: username,
+      password: password,
+      UserId: id
+    }).then(function (data) {
+      console.log(data)
+      // If there's an error, handle it by throwing up a bootstrap alert
+    }).catch(handleLoginErr);
+  }
 
-function handleLoginErr(err) {
-  $("#alert .msg").text(err.responseJSON);
-  $("#alert").fadeIn(500);
-}
+  function handleLoginErr(err) {
+    $("#alert .msg").text(err.responseJSON);
+    $("#alert").fadeIn(500);
+  }
 
 
   // ---------------------------------------------------------------//
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+  // Add Pending Users
+
+  function pendingUsers(GroupId) {
+    $.get("/api/pending_users/" + GroupId).then(function (data) {
+      console.log(data);
+      for (var i = 0; i < data.length; i++) {
+        gettingUserName(data[i].UserId, GroupId)
+      }
+    });
+  };
+
+  function gettingUserName(id, GroupId) {
+    $.get("/api/display_pendingUsers/" + id).then(function (data) {
+      console.log(data);
+      for (var i = 0; i < data.length; i++) {
+        $("#pendingReq").append("<div id=pending" + [i] + " >" + data[i].name + " would love to join your group!" + "<button class='" + [i] + " acceptPendingUser btn btn-success ml-2' data-name =" + data[i].name + " data-userID =" + id + " data-groupID=" + GroupId + " type='button'>Appove</button>" +
+          "<hr>");
+      }
+    });
+  };
+
+  $(document).on("click", "button.acceptPendingUser", function () {
+    var pendingUser_data = {
+      UserId: $(this).attr("data-userID"),
+      GroupId: $(this).attr("data-groupID")
+    };
+
+    console.log(pendingUser_data.UserId);
+    console.log(pendingUser_data.GroupId);
+
+    //Function to Update Usergroup table
+    updateRequest(pendingUser_data)
+
+    //Hides the div
+    $("#pending" + $(this).attr("class")[0]).hide();
+    console.log("You have approved " + $(this).attr("data-name") + "!!!");
+  });
+
+  function updateRequest(request) {
+    $.ajax({
+      method: "PUT",
+      url: "/api/approve_user",
+      data: request
+    })
+      .then(function (data) {
+        console.log(data);
+      });
+  }
+
+  // THIS IS THE FUNCTION THAT WILL BE USED IN THE IF STATEMENT
+  pendingUsers(1);
+  
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
