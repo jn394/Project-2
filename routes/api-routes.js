@@ -205,6 +205,78 @@ module.exports = function (app) {
       });
   });
 
+
+
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+ // Check for group
+ app.get("/api/group_check/:UserId", function (req, res) {
+  db.Usergroup.findAll({
+    where: {
+      UserId: req.params.UserId,
+      }
+  }).then(function (data) {
+    res.json(data);
+    console.log("-------------\nGroup Membership Check Complete!\n-------------")
+  });
+});
+
+
+
+ // Check admin
+ app.get("/api/admin_check/:UserId", function (req, res) {
+  db.Usergroup.findAll({
+    where: {
+      UserId: req.params.UserId,
+      Admin: true
+    }
+  }).then(function (data) {
+    res.json(data);
+    console.log("-------------\nAdmin Check Complete!\n-------------")
+  });
+});
+
+// // DisplayUserID for Current User in Console
+// app.get("/api/user_check/", function (req, res) {
+//   db.User.findAll({
+//     where: {
+//       UserId
+//       }
+//   }).then(function (data) {
+//     res.json(data);
+//     console.log("-------------\nUserID Info Listed!\n-------------")
+//   });
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 
 };

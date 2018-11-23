@@ -4,7 +4,6 @@ DROP DATABASE IF EXISTS shareflixDB;
 CREATE DATABASE shareflixDB;
 
 
-
 -- Current proposed model
   ________     __________     _____________        
  |_ User _|   |_ Groups _|   |_Shared Apps_|  
