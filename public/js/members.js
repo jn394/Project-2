@@ -5,6 +5,8 @@ $(document).ready(function () {
 
   $.get("/api/user_data").then(function (data) {
     $(".member-name").text(data.email);
+    
+
 
     // ----------------------------------------------------------------------------------------------------------------------------------------------------
     // Join Group Code
@@ -12,8 +14,10 @@ $(document).ready(function () {
     // Need this for the "joinAGroupBTN" post request
     $("#member-id").text(data.id);
     $("#member-id").attr("value", data.id);
+    console.log (data.id);
     // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
+ 
   });
 
   // Group Creation Button Functionality / Event Listener
@@ -65,7 +69,7 @@ $(document).ready(function () {
       GroupId: usergroup_data.GroupID,
       UserId: usergroup_data.UserID
     }).then(function (data) {
-      console.log("Group that you joined: ");
+      console.log("Group that you Created: ");
       console.log(data);
       $("#displayGroup").append("\n  AYYYY!! You have Made the Group: " + data.GroupId);
       // $("#joinGroupBTN").hide();
@@ -159,7 +163,8 @@ $(document).ready(function () {
     }).then(function (data) {
       console.log("Group that you joined: ");
       console.log(data);
-      $("#displayGroup").append("Congratz!! You have joined Group: " + data.GroupId);
+      $("#displayGroup").append("Congratz!! You have requested to join Group #: " + data.GroupId);
+      hidebuttons()
       // $("#joinGroupBTN").hide();
 
       // If there's an error, handle it by throwing up a bootstrap alert
@@ -326,12 +331,94 @@ $(document).ready(function () {
   }
 
   // THIS IS THE FUNCTION THAT WILL BE USED IN THE IF STATEMENT
-  pendingUsers(1);
   
+  groupCheck();
+  // pendingUsers(1);
+  // I put pending user in my function below VVV
+
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
+//  Step 1, Check for group
+// ---------------------------------------------------------------------
+  function groupCheck() {
+    $.get("/api/user_data").then(function (data) {
+      console.log(data.id);
+    
+    $.get("/api/group_check/" + data.id).then(function (data) {
+      console.log(data);
+     var UserId = data.id
+        for (var i = 0; i < data.length; i++) {
+        if (data[i].UserId !== UserId) {
+          hidebuttons();
+          console.log("This user is in a group  \n As Such, we will be hiding the Create and Join Goup Buttons.");
+          adminCheck();
+        }
+      else 
+          console.log("This user is not in a group  \n Please Join or Create a group!");
+      
+    }
+    });
+  });
+};
+
+
+// Step 2, Check if Admin
+// ---------------------------------------------------------------------
+function adminCheck() {
+  $.get("/api/user_data").then(function (data) {
+    console.log(data.id);
+   
+    var UserDataAdminCheck = data.id
+
+  $.get("/api/admin_check/" + data.id).then(function (data) {
+    console.log(data);
+    console.log("ID for Admin Check: " + UserDataAdminCheck)
+      for (var i = 0; i < data.length; i++) {
+//Step 3A, if Admin is true, run Jay's pendingUser function ---------------------------------------------------------------------
+        if (data[i].Admin === true) {
+        console.log(data[0].UserId)
+        pendingUsers(UserDataAdminCheck);     
+        console.log("Checking to see if there are Users Requests for your Group")
+       }
+//Step 3B, if Admin is false, run check to see if user is Pending themselves  THIS DOES NOT WORK YET ---------------------------------------------------------------------
+       
+    else{
+      console.log("Not an Admin - loading pending request module...");
+        pendingUsers2(UserDataAdminCheck);
+    }
+  }
+  });
+});
+
+function pendingUsers2(data1) {
+  $.get("/api/pending_users/" + data1).then(function (data) {
+    console.log(data);
+    console.log("Let's see if you have made a pending request!")
+    for (var i = 0; i < data.length; i++) {
+      gettingUserName2(data[i].UserId, GroupId)
+      
+    }
+  });
+};
+
+function gettingUserName2(id) {
+  $.get("/api/display_pendingUsers/" + id).then(function (data) {
+    console.log(data);
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].Pending = true){
+        console.log("Your request is pending approval with the group admin!")
+      }
+      else 
+      console.log("\n\n\n\n\n\n\n\n\n\n\n\nTHIS IS WHERE WE DISPLAY EVERYTHING")
+    }
+  });
+};
+};
+
+function hidebuttons(){
+  $("#createGroupBTN").hide(),
+  $("#joinGroupBTN").hide();
+};
 
 
 });
-
-
