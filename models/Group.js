@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
       defaultValue: sequelize.literal('NOW()'),
     }
     // ----------------------------------------------------------------------------------------------------------------------------------------------------
-
+ 
   });
 
   Group.associate = function (models) {
@@ -30,6 +30,12 @@ module.exports = function (sequelize, DataTypes) {
     // When an User is deleted, also delete any associated Posts
     Group.belongsToMany(models.User, { through: 'Usergroup' });
   };
+
+  // Group.associate = function (models) {
+
+  //   Group.belongsToMany(models.App, { through: 'GroupApp' });
+  //  };
+ 
 
   return Group;
 };

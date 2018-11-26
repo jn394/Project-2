@@ -28,62 +28,22 @@
     </div>
   </div>
 
-
   <br>
 
+  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+  <!-- Adding Service to group -->
+  <div id="yourServices">Your Services</div>
 
-  <!-- Group Creation -->
-  <div class="form-group">
-    <label for="exampleInputUsername1">Streaming Username</label>
-    <input type="username" class="form-control" id="appUN-input" placeholder="Username">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword2">Streaming Password</label>
-    <input type="password" class="form-control" id="appPW-input" placeholder="Password">
-  </div>
-  <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <span class="sr-only">Error:</span> <span class="msg"></span>
-  </div>
+  <div id="testing">SHoULD Show up</div>
 
+  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
 
-  <!-- Made radio buttons exclusive -->
-
-  <div class="radio">
-    <label><input type="radio" id="netflix" name="serviceinput" value="Netflix" checked>Netflix</label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" id="hulu" name="serviceinput" value="Hulu">Hulu</label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" id="spotify" name="serviceinput" value="Spotify">Spotify</label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" id="hbo" name="serviceinput" value="HBO">HBO Now</label>
-  </div>
-
-
-  <!-- Button to call up Modal for Group detail information -->
-
-
-
-
-
-
-
-  <!-- Actual submit modal for said information ID=CreateGroup-->
-
-  <button type="submit" id="subscriptionsubmit" class="btn btn-danger">Add</button>
-
-  <br><br>
-
-  <!-- SIGN UP BUTTON  -->
+  <!-- Create group Button  -->
   <div class="row" id="createGroupBTN">
     <button type="button" id="createGroupBTN" class="btn btn-secondary" data-toggle="modal" data-target="#signInModal">
       Create A Group
     </button>
   </div>
-
 
   <!-- START SIGN IN MODAL -->
 
@@ -120,85 +80,9 @@
   </div>
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- End Group Creation -->
 
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
-
 
   <!-- Start Group Joining -->
 
@@ -243,13 +127,72 @@
 
   <!-- End Group Joining -->
 
+  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+
+  <!-- Start Adding Services -->
+
+  <!-- Button trigger modal -->
+  <button id="AddServiceBTN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddService-Modal">
+    Add Services
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="AddService-Modal" tabindex="-1" role="dialog" aria-labelledby="AddService-Modal-Label"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="AddService-Modal-Label">Services List:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-center">
+            <img class="serviceIcons rounded-circle" src="stylesheets/img/serviceIcons/iconfinder_netflix_143870.png "
+              alt="Netflix Icon" value="Netflix">
+            <img class="serviceIcons rounded-circle" src="stylesheets/img/serviceIcons/hulu-icon.png" alt="Hulu Icon"
+              value="Hulu">
+            <img class="serviceIcons rounded-circle" src="stylesheets/img/serviceIcons/iconfinder_Spotify_1298766.png "
+              alt="Spotify Icon" value="Spotify">
+            <img class="serviceIcons rounded-circle" src="stylesheets/img/serviceIcons/hbo-now-gift-card-taxon.png "
+              alt="HBO Now Icon" value="HBO">
+            <img class="serviceIcons rounded-circle" src="stylesheets/img/serviceIcons/iconfinder_new_york_times_143900.png "
+              alt="NyTimes Icon" value="NyTimes">
+          </div>
+
+          <br>
+
+          <div id="serviceCheck"></div>
+
+          <div class="form-group">
+            <label id="ServiceUN" for="exampleInputUsername1">Service Username</label>
+            <input type="username" class="form-control" id="appUN-input" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label id="ServicePW" for="exampleInputPassword2">Service Password</label>
+            <input type="password" class="form-control" id="appPW-input" placeholder="Password">
+          </div>
+
+
+          <button type="submit" id="subscriptionsubmit" class="btn btn-danger" data-dismiss="modal">Add</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- End Adding Services -->
+
+  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
 
   <!-- Pending Requests -->
   <div>
     <h4>Pending Approval:</h4>
     <div id="pendingReq"></div>
   </div>
- <!-- End Pending Requests -->
+  <!-- End Pending Requests -->
 
 
 
