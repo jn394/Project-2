@@ -265,13 +265,70 @@ module.exports = function (app) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Delete Users
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
+app.delete("/api/user_data_delete/:id", function(req, res) {
+  db.User.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(dbUser) {
+    res.json(dbUser);
+  });
+});
 
 
-
-
-
-
+// Leave Group
+app.delete("/api/user_data_leave/:UserId", function(req, res) {
+  db.Usergroup.destroy({
+    where: {
+      UserId: req.params.UserId
+    }
+  }).then(function(dbUser) {
+    res.json(dbUser);
+  });
+});
 
 
 

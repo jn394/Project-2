@@ -1,10 +1,12 @@
 $(document).ready(function () {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page  
-
+  $(document).on("click", "#deleteUserBTN", deleteUser);
+  $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
   $.get("/api/user_data").then(function (data) {
     $(".member-name").text(data.email);
+
     
 
 
@@ -15,6 +17,7 @@ $(document).ready(function () {
     $("#member-id").text(data.id);
     $("#member-id").attr("value", data.id);
     console.log (data.id);
+    
     // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
  
@@ -71,7 +74,9 @@ $(document).ready(function () {
     }).then(function (data) {
       console.log("Group that you Created: ");
       console.log(data);
+      hidebuttons();
       $("#displayGroup").append("\n  AYYYY!! You have Made the Group: " + data.GroupId);
+      
       // $("#joinGroupBTN").hide();
 
       // If there's an error, handle it by throwing up a bootstrap alert
@@ -164,7 +169,7 @@ $(document).ready(function () {
       console.log("Group that you joined: ");
       console.log(data);
       $("#displayGroup").append("Congratz!! You have requested to join Group #: " + data.GroupId);
-      hidebuttons()
+      hidebuttons();
       // $("#joinGroupBTN").hide();
 
       // If there's an error, handle it by throwing up a bootstrap alert
@@ -415,10 +420,211 @@ function gettingUserName2(id) {
 };
 };
 
-function hidebuttons(){
-  $("#createGroupBTN").hide(),
-  $("#joinGroupBTN").hide();
-};
+
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function deleteUser(event){
+  $.get("/api/user_data").then(function (data) {
+    console.log(data.id + " is deleting their user account!");
+
+  event.stopPropagation();
+    var id = data.id;
+    
+  $.ajax({
+    method: "DELETE",
+    url: "/api/user_delete/" + id
+  })
+    .then(console.log("User Removed!"),
+    res.redirect(307, "/api/login"))}
+    // TODO:  this location.reload does not work.  Need ajax hijacking to trigger a function that reloads the page.
+  )};
+
+
+
+
+
+function leaveGroup(event){
+  $.get("/api/user_data").then(function (data) {
+    console.log(data.id);
+    event.stopPropagation();
+    var UserId = data.id;
+    
+    
+  $.ajax({
+    method: "DELETE",
+    url: "/api/user_data_leave/" + UserId
+  })
+    .then(console.log("User Left Group!"),
+    showbuttons())}
+    
+    // TODO:  this location.reload does not work.  Need ajax hijacking to trigger a function that reloads the page.
+  )};
+
+
+  function hidebuttons(){
+    $("#createGroupBTN").hide(),
+    $("#joinGroupBTN").hide();
+    $("#leaveGroupBTN").show();
+  };
+  
+  
+  function showbuttons(){
+    $("#createGroupBTN").show(),
+    $("#joinGroupBTN").show();
+    $("#leaveGroupBTN").hide();
+  };
