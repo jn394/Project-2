@@ -1,12 +1,12 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var App = sequelize.define("App", {
     // Giving the App model a name of type STRING
     App_name: DataTypes.STRING,
     AppUsername: DataTypes.STRING,
     AppPassword: DataTypes.STRING,
-    });
+  });
 
- 
+
   //   App.associate = function(models) {
   //   // Associating App with Groups
   //   // When an App is deleted, also delete any associated Groups (if admin)  Might get rid of this function because we changed gears to tie one App to one group.
@@ -15,14 +15,29 @@ module.exports = function(sequelize, DataTypes) {
   //   });
   // };
 
-  App.associate = function(models) {
- 
-    App.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
+  // App.associate = function(models) {
+
+  //   App.belongsTo(models.User, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
+
+  // App.associate = function(models) {
+
+  //   App.belongsTo(models.Group, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
+
+  App.associate = function (models) {
+
+    App.belongsToMany(models.Group, { through: 'Groupapp' });
   };
+
   return App;
 };
 
