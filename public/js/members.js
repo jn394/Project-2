@@ -1,8 +1,10 @@
 $(document).ready(function () {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page  
-  $(document).on("click", "#deleteUserBTN", deleteUser);
-  $(document).on("click", "#leaveGroupBTN", leaveGroup);
+$(document).on("click", "#deleteUserBTN", deleteUser);
+$(document).on("click", "#leaveGroupBTN", leaveGroup);
+
+
 
   $.get("/api/user_data").then(function (data) {
     $(".member-name").text(data.email);
@@ -14,7 +16,7 @@ $(document).ready(function () {
     // Need this for the "joinAGroupBTN" post request
     $("#member-id").text(data.id);
     $("#member-id").attr("value", data.id);
-    console.log (data.id);
+    console.log(data.id);
 
     // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -74,7 +76,7 @@ $(document).ready(function () {
       console.log(data);
       hidebuttons();
       $("#displayGroup").append("\n  AYYYY!! You have Made the Group: " + data.GroupId);
-      
+
       // $("#joinGroupBTN").hide();
 
       // If there's an error, handle it by throwing up a bootstrap alert
@@ -491,6 +493,7 @@ $(document).ready(function () {
             console.log("Your request is pending approval with the group admin!")
           }
           else
+            // TODO: INSERT Function that generates Dashboard table HERE
             console.log("\n\n\n\n\n\n\n\n\n\n\n\nTHIS IS WHERE WE DISPLAY EVERYTHING")
         }
       });
@@ -647,60 +650,134 @@ $(document).ready(function () {
 
 
 
+// I think the double function execution is happening as a result of the "$(document).on("click", "#deleteUserBTN", deleteUser);"
+// This code below is me trying to fix that.
+// // Group Creation Button Functionality / Event Listener
+// $("#deleteUserBTN").on("click", function (event) {
+//   deleteUser() 
+//   console.log("Delete Clicked");
+//   event.preventDefault();
+// });
+
+
+// $("#leaveGroupBTN").on("click", function (event) {
+//   leaveGroup();
+//   console.log("Leave Group Clicked");
+//   event.preventDefault();
+// });
 
 
 
 
 
 
-
-function deleteUser(event){
+function deleteUser(event) {  
   $.get("/api/user_data").then(function (data) {
-    console.log(data.id + " is deleting their user account!");
-
-  event.stopPropagation();
+    console.log(data.id + " is deleting their user account!");   
+    event.stopPropagation();
+    var person = prompt("Are you sure you want to delete your Account?  A deleted account cannot be recovered. Type 'DELETE' and press ok to continue");
     var id = data.id;
     
-  $.ajax({
-    method: "DELETE",
-    url: "/api/user_delete/" + id
-  })
-    .then(console.log("User Removed!"),
-    res.redirect(307, "/api/login"))}
+    if (person !== "DELETE") {
+      alert("User cancelled delete request.");
+    }
+      else {
+
+    $.ajax({
+      method: "DELETE",
+      url: "/api/user_data_delete/" + id
+    })
+      .then(console.log("User Removed!"),
+      window.location.replace("/"));
+   
+  }
+ 
     // TODO:  this location.reload does not work.  Need ajax hijacking to trigger a function that reloads the page.
-  )};
+  })
+};
 
 
 
 
 
-function leaveGroup(event){
+
+
+function leaveGroup(event) {
   $.get("/api/user_data").then(function (data) {
     console.log(data.id);
     event.stopPropagation();
     var UserId = data.id;
-    
-    
-  $.ajax({
-    method: "DELETE",
-    url: "/api/user_data_leave/" + UserId
-  })
-    .then(console.log("User Left Group!"),
-    showbuttons())}
-    
+
+
+    $.ajax({
+      method: "DELETE",
+      url: "/api/user_data_leave/" + UserId
+    })
+      .then(console.log("User Left Group!"),
+        showbuttons())
+  }
+
     // TODO:  this location.reload does not work.  Need ajax hijacking to trigger a function that reloads the page.
-  )};
+  )
+};
 
 
-  function hidebuttons(){
-    $("#createGroupBTN").hide(),
+function hidebuttons() {
+  $("#createGroupBTN").hide(),
     $("#joinGroupBTN").hide();
-    $("#leaveGroupBTN").show();
-  };
-  
-  
-  function showbuttons(){
-    $("#createGroupBTN").show(),
+  $("#leaveGroupBTN").show();
+};
+
+
+function showbuttons() {
+  $("#createGroupBTN").show(),
     $("#joinGroupBTN").show();
-    $("#leaveGroupBTN").hide();
-  };
+  $("#leaveGroupBTN").hide();
+};
+
+
+
+
+
+// Dashboard Logic
+// ---------------------------------------------------------------------
+var dashboardBody = $("#dashboardBody");
+// Empty the contents of the dashboard div
+function createdashboardRow() {
+  $("#dashboardBody").empty();
+
+  var newAppRow = $("<tr>").append(
+    // App image / which is also a link will replace data.x below...
+    $("<td>").text(data.X),
+    // App username, represented by a button, will replace data.y below...
+    $("<td>").text(data.Y),
+    // App password, represented by a button, will replace data.z below...
+    $("<td>").text(data.Z),
+    // Auser who provides the application, will replace data.Name...
+    $("<td>").text(data.Name));
+  return newAppRow;
+}
+
+function getAppData() {
+  //  API route will be whatever Jays get request is.
+  $.get("/api/XXXXXX", function (data) {
+    var rowsToAdd = [];
+    for (var i = 0; i < data.length; i++) {
+      rowsToAdd.push(createdashboardRow(data[i]));
+    }
+    renderAuthorList(rowsToAdd);
+  });
+}
+
+// A function for rendering the list of authors to the page
+function fillTable(rows) {
+  $("#dashboardBody").children().not(":last").remove();
+  $("#dashboardBody").children(".alert").remove();
+  if (rows.length) {
+    console.log(rows);
+    $("#dashboardBody").prepend(rows);
+  }
+  else {
+    return 
+  }
+}
