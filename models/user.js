@@ -37,8 +37,9 @@ module.exports = function (sequelize, DataTypes) {
   // };
 
   User.associate = function (models) {
-
-    User.belongsToMany(models.Group, { through: 'Usergroup' });
+// Line 42 below: added " , onDelete: "cascade" ]); <--- This may cause issues with user to group ownership and can be Deleted"
+    User.belongsToMany(models.Group, { through: 'Usergroup',
+    onDelete: "cascade" });
   };
 
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
