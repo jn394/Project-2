@@ -7,8 +7,6 @@ $(document).ready(function () {
   $.get("/api/user_data").then(function (data) {
     $(".member-name").text(data.email);
 
-    
-
 
     // ----------------------------------------------------------------------------------------------------------------------------------------------------
     // Join Group Code
@@ -17,10 +15,10 @@ $(document).ready(function () {
     $("#member-id").text(data.id);
     $("#member-id").attr("value", data.id);
     console.log (data.id);
-    
+
     // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
- 
+
   });
 
   // Group Creation Button Functionality / Event Listener
@@ -118,6 +116,44 @@ $(document).ready(function () {
       };
     });
   });
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // Testing
+  $.get("/api/testing").then(function (data) {
+    console.log(data);
+    for (var i = 0; i < data.length; i++) {
+      //Put either List View or Card View
+      console.log(data[i]);
+      var members = data[i].Users;
+      var listOfMembers = [];
+
+      listApps(data[i].id);
+
+      for (var j = 0; j < members.length; j++) {
+        listOfMembers.push(members[j].name);
+      };
+
+      $("#testing").append(
+        "<div><h5>Group #: " + data[i].id + "<br>" +
+        "Group Name: " + data[i].name + "<br>" +
+        "Group Body: " + data[i].body + "<br>" +
+        "Users In Group: " + listOfMembers +
+        "</div>" +
+        //Join A Group Button
+        "<button class='joinAGroupBTN btn btn-success' data-dismiss='modal' data-groupID=" + data[i].id + " type='button'>+ Join</button>" +
+        "<hr>");
+    };
+  });
+
+  function listApps(GroupId) {
+    $.get("/api/list_apps/" + GroupId).then(function (data) {
+      console.log(data);
+    });
+  };
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
 
   // Modal Search Button
   $("#groupSearchBTN").on("click", function (event) {
@@ -221,32 +257,58 @@ $(document).ready(function () {
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+  //Only show when they are in a group
   // -------------------  ADD A SERVICE LOGIC -----------------------//
 
-  // $(document).on("click", "button.joinAGroupBTN", function () {
+  // Toggle Effect for Service Icons
+  $(".serviceIcons").click(function () {
+    $("#serviceCheck").empty();
+    $(this).toggleClass("active");
+    if ($(".serviceIcons.active").length > 0) {
+      $(this).css({
+        height: "54px",
+        width: "54px",
+        border: "solid yellow 2px"
+      });
+      checkApp($(this).attr("value"));
+      $("#ServiceUN").text($(this).attr("value") + " Username");
+      $("#ServicePW").text($(this).attr("value") + " Password");
+    }
+    else {
+      $(this).css({
+        height: "50px",
+        width: "50px",
+        border: "0"
+      });
+      $("#ServiceUN").text("Service Username");
+      $("#ServicePW").text("Service Password");
+    }
+  });
+
+  // Checks if User has already added this app
+  function checkApp(appName) {
+    $.get("/api/app_name/" + appName).then(function (data) {
+      console.log(data);
+      if (data[0].App_name === appName) {
+        $("#serviceCheck").append("<div class='alert alert-danger' role='alert'>You Already Have this Service</div>")
+      };
+    });
+  };
+
   $("#subscriptionsubmit").on("click", function (event) {
     event.preventDefault();
 
-    console.log("clicked add!!")
+    console.log("clicked add!!");
 
-    var appName = ""
+    var appName = "";
 
     // Logic to determne which service has been clicked ... annoying coudlnt use .val for this but was the only way i could get it working //
 
-    if ($('#netflix').is(":checked")) {
-      appName = "Netflix";
-    } else if ($('#hulu').is(":checked")) {
-      appName = "Hulu"
-    } else if ($('#spotify').is(":checked")) {
-      appName = "Spotify"
-    } else if ($('#hbo').is(":checked")) {
-      appName = "HBO"
+    if ($(".serviceIcons.active").length > 0) {
+      appName = $(".serviceIcons.active").attr("value");
     };
 
-
     console.log(appName, "App name ------");
-
 
     var appData = {
       app_username: $("#appUN-input").val().trim(),
@@ -255,35 +317,50 @@ $(document).ready(function () {
 
     };
 
-    console.log(appData)
+    console.log(appData);
 
-    // GET REQUEST TO Get AppName so we can run logic to check if already has netflix
-
-    checkApp()
-
-    addApp(appData.app, appData.app_username, appData.app_password, $("#member-id").attr("value"))
+    addApp(appData.app, appData.app_username, appData.app_password, $("#member-id").attr("value"), groupid);
 
   });
 
-  function addApp(app, username, password, id) {
+  function addApp(app, username, password, id, groupid) {
     $.post("/api/addapp", {
       app: app,
       username: username,
       password: password,
-      UserId: id
     }).then(function (data) {
-      console.log(data)
+      console.log("this should be data");
+      console.log(data);
+      addUserApp(id, groupid, data.id);
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
-  }
+  };
 
-  function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
-    $("#alert").fadeIn(500);
-  }
-
+  // Creating GroupApp and UserId association
+  function addUserApp(id, groupid, AppId) {
+    $.post("/api/addUserApp_groupapp/", {
+      UserId: id,
+      GroupId: groupid,
+      AppId: AppId
+    }).then(function (data) {
+      console.log(data);
+      $("#AddServiceBTN").show();
+      // If there's an error, handle it by throwing up a bootstrap alert
+    }).catch(handleLoginErr);
+  };
 
   // ---------------------------------------------------------------//
+  // Adding Service to group
+
+  // $.get("/api/addService_toGroup/" + UserId).then(function (data) {
+  //   console.log(data);
+  //   // for (var i = 0; i < data.length; i++) {
+  //   //   gettingUserName(data[i].UserId, GroupId)
+  //   // }
+  // });
+
+
+
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
   // Add Pending Users
@@ -336,90 +413,89 @@ $(document).ready(function () {
   }
 
   // THIS IS THE FUNCTION THAT WILL BE USED IN THE IF STATEMENT
-  
+
   groupCheck();
   // pendingUsers(1);
   // I put pending user in my function below VVV
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-//  Step 1, Check for group
-// ---------------------------------------------------------------------
+  //  Step 1, Check for group
+  // ---------------------------------------------------------------------
   function groupCheck() {
     $.get("/api/user_data").then(function (data) {
       console.log(data.id);
-    
-    $.get("/api/group_check/" + data.id).then(function (data) {
-      console.log(data);
-     var UserId = data.id
+
+      $.get("/api/group_check/" + data.id).then(function (data) {
+        console.log(data);
+        var UserId = data.id
         for (var i = 0; i < data.length; i++) {
-        if (data[i].UserId !== UserId) {
-          hidebuttons();
-          console.log("This user is in a group  \n As Such, we will be hiding the Create and Join Goup Buttons.");
-          adminCheck();
+          if (data[i].UserId !== UserId) {
+            hidebuttons();
+            console.log("This user is in a group  \n As Such, we will be hiding the Create and Join Goup Buttons.");
+            adminCheck();
+          }
+          else
+            console.log("This user is not in a group  \n Please Join or Create a group!");
+
         }
-      else 
-          console.log("This user is not in a group  \n Please Join or Create a group!");
-      
-    }
+      });
     });
-  });
-};
+  };
 
 
-// Step 2, Check if Admin
-// ---------------------------------------------------------------------
-function adminCheck() {
-  $.get("/api/user_data").then(function (data) {
-    console.log(data.id);
-   
-    var UserDataAdminCheck = data.id
+  // Step 2, Check if Admin
+  // ---------------------------------------------------------------------
+  function adminCheck() {
+    $.get("/api/user_data").then(function (data) {
+      console.log(data.id);
 
-  $.get("/api/admin_check/" + data.id).then(function (data) {
-    console.log(data);
-    console.log("ID for Admin Check: " + UserDataAdminCheck)
-      for (var i = 0; i < data.length; i++) {
-//Step 3A, if Admin is true, run Jay's pendingUser function ---------------------------------------------------------------------
-        if (data[i].Admin === true) {
-        console.log(data[0].UserId)
-        pendingUsers(UserDataAdminCheck);     
-        console.log("Checking to see if there are Users Requests for your Group")
-       }
-//Step 3B, if Admin is false, run check to see if user is Pending themselves  THIS DOES NOT WORK YET ---------------------------------------------------------------------
-       
-    else{
-      console.log("Not an Admin - loading pending request module...");
-        pendingUsers2(UserDataAdminCheck);
-    }
-  }
-  });
-});
+      var UserDataAdminCheck = data.id
 
-function pendingUsers2(data1) {
-  $.get("/api/pending_users/" + data1).then(function (data) {
-    console.log(data);
-    console.log("Let's see if you have made a pending request!")
-    for (var i = 0; i < data.length; i++) {
-      gettingUserName2(data[i].UserId, GroupId)
-      
-    }
-  });
-};
+      $.get("/api/admin_check/" + data.id).then(function (data) {
+        console.log(data);
+        console.log("ID for Admin Check: " + UserDataAdminCheck)
+        for (var i = 0; i < data.length; i++) {
+          //Step 3A, if Admin is true, run Jay's pendingUser function ---------------------------------------------------------------------
+          if (data[i].Admin === true) {
+            console.log(data[0].UserId)
+            $("#AddServiceBTN").show();
+            pendingUsers(UserDataAdminCheck);
+            console.log("Checking to see if there are Users Requests for your Group")
+          }
+          //Step 3B, if Admin is false, run check to see if user is Pending themselves  THIS DOES NOT WORK YET ---------------------------------------------------------------------
 
-function gettingUserName2(id) {
-  $.get("/api/display_pendingUsers/" + id).then(function (data) {
-    console.log(data);
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].Pending = true){
-        console.log("Your request is pending approval with the group admin!")
-      }
-      else 
-      console.log("\n\n\n\n\n\n\n\n\n\n\n\nTHIS IS WHERE WE DISPLAY EVERYTHING")
-    }
-  });
-};
-};
+          else {
+            console.log("Not an Admin - loading pending request module...");
+            pendingUsers2(UserDataAdminCheck);
+          }
+        }
+      });
+    });
 
+    function pendingUsers2(data1) {
+      $.get("/api/pending_users/" + data1).then(function (data) {
+        console.log(data);
+        console.log("Let's see if you have made a pending request!")
+        for (var i = 0; i < data.length; i++) {
+          gettingUserName2(data[i].UserId, GroupId)
+        }
+      });
+    };
+
+    function gettingUserName2(id) {
+      $.get("/api/display_pendingUsers/" + id).then(function (data) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].Pending = true) {
+            console.log("Your request is pending approval with the group admin!")
+          }
+          else
+            console.log("\n\n\n\n\n\n\n\n\n\n\n\nTHIS IS WHERE WE DISPLAY EVERYTHING")
+        }
+      });
+    };
+  };
 
 
 

@@ -106,6 +106,34 @@ module.exports = function (app) {
     });
   });
 
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //Testing
+  app.get("/api/testing", function (req, res) {
+    db.Group.findAll({
+      include: [
+        {
+          model: db.User
+        }
+      ]
+    }).then(function (data) {
+      res.json(data);
+    });
+  });
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //Listing Apps
+  app.get("/api/list_apps/:GroupId", function (req, res) {
+    db.App.findAll({
+      where: {
+        GroupId: req.body.GroupId
+      }
+    }).then(function (data) {
+      res.json(data);
+    });
+  });
+
   // Modal Search Button
   app.get("/api/group_join/:group_name", function (req, res) {
     db.Group.findAll({
@@ -147,17 +175,26 @@ module.exports = function (app) {
 
   // ADD AN APP ROUTE -----//
 
+  // CheckApp Fucntion
+  app.get("/api/app_name/:appName", function (req, res) {
+    db.App.findAll({
+      where: {
+        App_name: req.params.appName,
+      }
+    }).then(function (data) {
+      res.json(data);
+    });
+  });
 
+  // Adding App to App table
   app.post("/api/addapp", function (req, res) {
     console.log(req.body);
     db.App.create({
       App_name: req.body.app,
       AppUsername: req.body.username,
-      AppPassword: req.body.password,
-      UserId: req.body.UserId
-
-    }).then(function () {
-      res.redirect(307, "/api/login");
+      AppPassword: req.body.password
+    }).then(function (data) {
+      res.json(data);
     }).catch(function (err) {
       console.log(err);
       res.json(err);
@@ -165,8 +202,39 @@ module.exports = function (app) {
     });
   });
 
+  // Creating GroupApp and UserId association
+  app.post("/api/addUserApp_groupapp/", function (req, res) {
+    console.log(req.body);
+    db.GroupApp.create({
+      UserId: req.body.UserId,
+      AppId: req.body.AppId,
+      GroupId: 100
+    }).then(function (data) {
+      res.json(data);
+    }).catch(function (err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
+    });
+  });
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // Adding Service to group
+
+  app.get("/api/addService_toGroup/:UserId", function (req, res) {
+    db.App.findAll({
+      where: {
+        UserId: req.params.UserId,
+        Pending: true
+      }
+    }).then(function (data) {
+      res.json(data);
+    });
+  });
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+
   // Add Pending Users
 
   // Getting Pending Users
@@ -205,106 +273,48 @@ module.exports = function (app) {
       });
   });
 
-
-
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
- // Check for group
- app.get("/api/group_check/:UserId", function (req, res) {
-  db.Usergroup.findAll({
-    where: {
-      UserId: req.params.UserId,
+  // Check for group
+  app.get("/api/group_check/:UserId", function (req, res) {
+    db.Usergroup.findAll({
+      where: {
+        UserId: req.params.UserId,
       }
-  }).then(function (data) {
-    res.json(data);
-    console.log("-------------\nGroup Membership Check Complete!\n-------------")
+    }).then(function (data) {
+      res.json(data);
+      console.log("-------------\nGroup Membership Check Complete!\n-------------")
+    });
   });
-});
 
 
 
- // Check admin
- app.get("/api/admin_check/:UserId", function (req, res) {
-  db.Usergroup.findAll({
-    where: {
-      UserId: req.params.UserId,
-      Admin: true
-    }
-  }).then(function (data) {
-    res.json(data);
-    console.log("-------------\nAdmin Check Complete!\n-------------")
+  // Check admin
+  app.get("/api/admin_check/:UserId", function (req, res) {
+    db.Usergroup.findAll({
+      where: {
+        UserId: req.params.UserId,
+        Admin: true
+      }
+    }).then(function (data) {
+      res.json(data);
+      console.log("-------------\nAdmin Check Complete!\n-------------")
+    });
   });
-});
 
-// // DisplayUserID for Current User in Console
-// app.get("/api/user_check/", function (req, res) {
-//   db.User.findAll({
-//     where: {
-//       UserId
-//       }
-//   }).then(function (data) {
-//     res.json(data);
-//     console.log("-------------\nUserID Info Listed!\n-------------")
-//   });
-// });
+  // // DisplayUserID for Current User in Console
+  // app.get("/api/user_check/", function (req, res) {
+  //   db.User.findAll({
+  //     where: {
+  //       UserId
+  //       }
+  //   }).then(function (data) {
+  //     res.json(data);
+  //     console.log("-------------\nUserID Info Listed!\n-------------")
+  //   });
+  // });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  //-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Delete Users
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
