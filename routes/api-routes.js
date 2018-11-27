@@ -121,18 +121,18 @@ module.exports = function (app) {
     });
   });
 
-  // ----------------------------------------------------------------------------------------------------------------------------------------------------
-
   //Listing Apps
-  app.get("/api/list_apps/:GroupId", function (req, res) {
+  app.get("/api/list_apps/:UserId", function (req, res) {
     db.App.findAll({
       where: {
-        GroupId: req.body.GroupId
+        UserId: req.params.UserId
       }
     }).then(function (data) {
-      res.json(data);
+      res.send(data);
     });
   });
+
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Modal Search Button
   app.get("/api/group_join/:group_name", function (req, res) {
@@ -176,12 +176,14 @@ module.exports = function (app) {
   // ADD AN APP ROUTE -----//
 
   // CheckApp Fucntion
-  app.get("/api/app_name/:appName", function (req, res) {
+  app.get("/api/app_name/:appName/UserId/:id", function (req, res) {
     db.App.findAll({
       where: {
         App_name: req.params.appName,
+        UserId: req.params.id
       }
     }).then(function (data) {
+      console.log("READ THIS");
       res.json(data);
     });
   });
@@ -192,23 +194,8 @@ module.exports = function (app) {
     db.App.create({
       App_name: req.body.app,
       AppUsername: req.body.username,
-      AppPassword: req.body.password
-    }).then(function (data) {
-      res.json(data);
-    }).catch(function (err) {
-      console.log(err);
-      res.json(err);
-      // res.status(422).json(err.errors[0].message);
-    });
-  });
-
-  // Creating GroupApp and UserId association
-  app.post("/api/addUserApp_groupapp/", function (req, res) {
-    console.log(req.body);
-    db.GroupApp.create({
-      UserId: req.body.UserId,
-      AppId: req.body.AppId,
-      GroupId: 100
+      AppPassword: req.body.password,
+      UserId: req.body.UserId
     }).then(function (data) {
       res.json(data);
     }).catch(function (err) {

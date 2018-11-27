@@ -6,36 +6,13 @@ module.exports = function (sequelize, DataTypes) {
     AppPassword: DataTypes.STRING,
   });
 
+  App.associate = function(models) {
 
-  //   App.associate = function(models) {
-  //   // Associating App with Groups
-  //   // When an App is deleted, also delete any associated Groups (if admin)  Might get rid of this function because we changed gears to tie one App to one group.
-  //   App.hasMany(models.Group, {
-  //     onDelete: "cascade"
-  //   });
-  // };
-
-  // App.associate = function(models) {
-
-  //   App.belongsTo(models.User, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
-
-  // App.associate = function(models) {
-
-  //   App.belongsTo(models.Group, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
-
-  App.associate = function (models) {
-
-    App.belongsToMany(models.Group, { through: 'Groupapp' });
+    App.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
   };
 
   return App;
