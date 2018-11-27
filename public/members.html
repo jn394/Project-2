@@ -5,13 +5,15 @@
   <title>ShareFlix</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
   <link href="stylesheets/dashSheet.css" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-expand-lg navbar-dark ">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="/logout">
@@ -20,6 +22,11 @@
       </div>
     </div>
   </nav>
+
+  <br>
+  <br>
+  <br>
+  <br>
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -27,19 +34,19 @@
       </div>
     </div>
   </div>
-
   <br>
-
+  <div class="container"> 
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+  
   <!-- Adding Service to group -->
   <div id="yourServices">Your Services</div>
 
   <div id="testing">SHoULD Show up</div>
 
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
-
+<!-- Create Or join Group  -->
   <!-- Create group Button  -->
-  <div class="row" id="createGroupBTN">
+  <div  id="createGroupBTN">
     <button type="button" id="createGroupBTN" class="btn btn-secondary" data-toggle="modal" data-target="#signInModal">
       Create A Group
     </button>
@@ -74,7 +81,7 @@
         <!-- MODAL FOOTER -->
         <div class="modal-footer">
           <!-- SUBMIT BUTTON -->
-          <button type="submit" class="btn btn-primary" id="submitgroup" data-dismiss="modal">Submit</button>
+          <button type="submit" class="btn btn-danger" id="submitgroup" data-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -95,7 +102,7 @@
   <div id="displayGroup"></div>
 
   <!-- Button trigger modal -->
-  <button id="joinGroupBTN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#groupSearch-Modal">
+  <button id="joinGroupBTN" type="button" class="btn btn-danger" data-toggle="modal" data-target="#groupSearch-Modal">
     Join A Group
   </button>
 
@@ -114,7 +121,7 @@
           <nav class="navbar navbar-light bg-light">
             <form class="form-inline">
               <input id="groupSearch-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button id="groupSearchBTN" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <button id="groupSearchBTN" class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
             </form>
           </nav>
           <h4>Groups:</h4>
@@ -131,9 +138,14 @@
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
 
   <!-- Start Adding Services -->
+<hr>
+<br>
+<br>
+<br>
+<br>
 
   <!-- Button trigger modal -->
-  <button id="AddServiceBTN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddService-Modal">
+  <button id="AddServiceBTN" type="button" class="btn btn-danger" data-toggle="modal" data-target="#AddService-Modal">
     Add Services
   </button>
 
@@ -198,14 +210,7 @@
 
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-  <script type="text/javascript" src="js/members.js"></script>
-
-
+  
 
   <!-- Leave Group BUTTON  -->
   <div class="row" id="leaveGroupBTN">
@@ -262,11 +267,18 @@
         <!-- End table -->
       </table>
     </div>
-  </div>
+  </div> 
 
   <div>
     <br><br>
   </div>
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/members.js"></script>
 
 
 </body>
