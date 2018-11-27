@@ -31,12 +31,6 @@ module.exports = function (sequelize, DataTypes) {
     Group.belongsToMany(models.User, { through: 'Usergroup' });
   };
 
-  // Group.associate = function (models) {
-
-  //   Group.belongsToMany(models.App, { through: 'GroupApp' });
-  //  };
- 
-
   return Group;
 };
 
