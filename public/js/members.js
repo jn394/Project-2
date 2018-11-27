@@ -491,6 +491,7 @@ $(document).ready(function () {
             console.log("Your request is pending approval with the group admin!")
           }
           else
+            createdashboardRow();
             console.log("\n\n\n\n\n\n\n\n\n\n\n\nTHIS IS WHERE WE DISPLAY EVERYTHING")
         }
       });
@@ -704,3 +705,18 @@ function leaveGroup(event){
     $("#joinGroupBTN").show();
     $("#leaveGroupBTN").hide();
   };
+
+
+
+           // Empty the contents of the crime div on new lcoations search to replace with new crime data.
+           function createdashboardRow(){
+            $("#dashboardBody").empty();
+            var newAppRow = $("<tr>").append(
+                // App image / which is also a link = data.x
+                $("<td>").text(data.X),
+                // App image / which is also a link = data.x
+                $("<td>").text(data.Y),
+                $("<td>").text(data.Z),
+                $("<td>").text(data.Name));
+                return newAppRow;
+               }
