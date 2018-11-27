@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-  <title>Passport Authentication</title>
+  <title>ShareFlix</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-  <link href="stylesheets/style.css" rel="stylesheet">
+  <link href="stylesheets/dashSheet.css" rel="stylesheet">
 </head>
 
 <body>
@@ -46,6 +46,7 @@
   </div>
 
   <!-- START SIGN IN MODAL -->
+
 
   <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -206,37 +207,66 @@
 
 
 
+  <!-- Leave Group BUTTON  -->
+  <div class="row" id="leaveGroupBTN">
+    <button type="button" id="leaveGroupBTN" class="btn btn-secondary" style='cursor:pointer;color:goldenrod'><a href="#signup"></a>
+      Leave Group
+    </button>
+  </div>
 
 
 
 
+  <!-- Delete Account BUTTON  -->
+  <div class="row" id="deleteUserBTN">
+    <button type="button" id="deleteUserBTN" class="btn btn-secondary" style='cursor:pointer;color:red'><a href="#signup"></a>
+      Delete Account
+    </button>
+  </div>
 
+  <!-- Application Data Table - "The Dash" -->
+  <!------------------------------------------------------------------------------------------------------- -->
+  <!-- SECOND ROW OF DATA -->
+  
 
+  <div class="row">
 
+       <!-- BEGIN TABLE -->
+    
+       <div class="col-md-10 offset-md-1 table-responsive-sm" id="dashboardLibrary">
+      
+        <!-- Title -->
+        <br>
 
+      <h4 id="dashboardHeader">Your Shared Library</h4>
+     
+      <table class="table">
+        <!-- Begin table head -->
+        <thead>
+          <tr>
+            <th scope="col" class="column">App</th>
+            <th scope="col" class="column">Username</th>
+            <th scope="col" class="column">Password</th>
+            <th scope="col" class="column">Provider</th>
+          </tr>
+        </thead>
+        <!-- Begin table body -->
+        <tbody id="dashboardBody">
+          <tr>
+            <td id="appSpot"> Shared Application / Link to Site </td>
+            <td id="userSpot"> Username </td>
+            <td id="passSpot"> Hidden Password </td>
+            <td id="sharerSpot"> Owner of the Account</td>
 
+        </tbody>
+        <!-- End table -->
+      </table>
+    </div>
+  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <div>
+    <br><br>
+  </div>
 
 
 </body>
