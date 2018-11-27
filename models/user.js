@@ -28,13 +28,13 @@ module.exports = function (sequelize, DataTypes) {
 
   });
 
-  // User.associate = function (models) {
-  //   // Associating User with Apps
-  //   // When an User is deleted, also delete any associated Posts
-  //   User.hasMany(models.Groupapp, {
-  //     onDelete: "cascade"
-  //   });
-  // };
+  User.associate = function (models) {
+    // Associating User with Apps
+    // When an User is deleted, also delete any associated Posts
+    User.hasMany(models.App, {
+      onDelete: "cascade"
+    });
+  };
 
   User.associate = function (models) {
 // Line 42 below: added " , onDelete: "cascade" ]); <--- This may cause issues with user to group ownership and can be Deleted"

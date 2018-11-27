@@ -95,67 +95,23 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
     $.get("/api/group_join").then(function (data) {
       console.log(data);
-
       for (var i = 0; i < data.length; i++) {
-
         console.log(data[i]);
         var members = data[i].Users;
         var listOfMembers = [];
+        var listOfMemberIds = [];
+        var groupId = data[i].id;
 
         for (var j = 0; j < members.length; j++) {
           listOfMembers.push(members[j].name);
-        };
+          listOfMemberIds.push(members[j].id);
+        }
 
-        $("#searchResults").append(
-          "<div><h5>Group #: " + data[i].id + "<br>" +
-          "Group Name: " + data[i].name + "<br>" +
-          "Group Body: " + data[i].body + "<br>" +
-          "Users In Group: " + listOfMembers +
-          "</div>" +
-          //Join A Group Button
-          "<button class='joinAGroupBTN btn btn-success' data-dismiss='modal' data-groupID=" + data[i].id + " type='button'>+ Join</button>" +
-          "<hr>");
+        $("#searchResults").append(createNewRow(data[i], groupId, listOfMembers, listOfMemberIds));
+
       };
     });
   });
-
-  // ----------------------------------------------------------------------------------------------------------------------------------------------------
-
-  // Testing
-  $.get("/api/testing").then(function (data) {
-    console.log(data);
-    for (var i = 0; i < data.length; i++) {
-      //Put either List View or Card View
-      console.log(data[i]);
-      var members = data[i].Users;
-      var listOfMembers = [];
-
-      listApps(data[i].id);
-
-      for (var j = 0; j < members.length; j++) {
-        listOfMembers.push(members[j].name);
-      };
-
-      $("#testing").append(
-        "<div><h5>Group #: " + data[i].id + "<br>" +
-        "Group Name: " + data[i].name + "<br>" +
-        "Group Body: " + data[i].body + "<br>" +
-        "Users In Group: " + listOfMembers +
-        "</div>" +
-        //Join A Group Button
-        "<button class='joinAGroupBTN btn btn-success' data-dismiss='modal' data-groupID=" + data[i].id + " type='button'>+ Join</button>" +
-        "<hr>");
-    };
-  });
-
-  function listApps(GroupId) {
-    $.get("/api/list_apps/" + GroupId).then(function (data) {
-      console.log(data);
-    });
-  };
-
-  // ----------------------------------------------------------------------------------------------------------------------------------------------------
-
 
   // Modal Search Button
   $("#groupSearchBTN").on("click", function (event) {
@@ -167,24 +123,20 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
     $.get("/api/group_join/" + group_name).then(function (data) {
       console.log(data);
       for (var i = 0; i < data.length; i++) {
-        //Put either List View or Card View
+        // Put either List View or Card View
         console.log(data[i]);
         var members = data[i].Users;
         var listOfMembers = [];
+        var listOfMemberIds = [];
+        var groupId = data[i].id;
 
         for (var j = 0; j < members.length; j++) {
           listOfMembers.push(members[j].name);
-        };
+          listOfMemberIds.push(members[j].id);
+        }
 
-        $("#searchResults").append(
-          "<div><h5>Group #: " + data[i].id + "<br>" +
-          "Group Name: " + data[i].name + "<br>" +
-          "Group Body: " + data[i].body + "<br>" +
-          "Users In Group: " + listOfMembers +
-          "</div>" +
-          //Join A Group Button
-          "<button class='joinAGroupBTN btn btn-success' data-dismiss='modal' data-groupID=" + data[i].id + " type='button'>+ Join</button>" +
-          "<hr>");
+        $("#searchResults").append(createNewRow(data[i], groupId, listOfMembers, listOfMemberIds));
+        
       };
     });
   });
@@ -221,45 +173,71 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
   };
 
   // Function for creating a row for groups
-  // function createNewRow(group) {
+  function createNewRow(group, groupId, users, userId) {
 
-  //   //Setting Up the Card
-  //   var newGroupCard = $("<div>");
-  //   newGroupCard.addClass("card");
-  //   var newGroupCardHeading = $("<div>");
-  //   newGroupCardHeading.addClass("card-header");
-  //   var newGroupTitle = $("<h5>");
-  //   var newGroupCardBody = $("<div>");
-  //   newGroupCardBody.addClass("card-body");
-  //   var newGroupBody = $("<p>");
+    //Setting Up the Card
+    var newGroupCard = $("<div>");
+    newGroupCard.addClass("card");
+    var newGroupCardHeading = $("<div>");
+    newGroupCardHeading.addClass("card-header");
+    var newGroupTitle = $("<h5>");
+    var newGroupCardBody = $("<div>");
+    newGroupCardBody.addClass("card-body");
+    var newGroupBody = $("<h6>");
+    newGroupBody.attr("id", "groupDiv" + groupId);
 
-  //   //Join A Group Button
-  //   var joinBTN = $("<button>");
-  //   joinBTN.attr('class', 'joinAGroupBTN');
-  //   joinBTN.attr('data-dismiss', 'modal');
-  //   joinBTN.attr('data-groupID', group.id);
-  //   joinBTN.text("+ Join");
-  //   joinBTN.addClass("btn btn-success");
-  //   joinBTN.css({
-  //     float: "right",
-  //     "margin-top": "-5px"
-  //   });
+    //Join A Group Button
+    var joinBTN = $("<button>");
+    joinBTN.attr('class', 'joinAGroupBTN');
+    joinBTN.attr('data-dismiss', 'modal');
+    joinBTN.attr('data-groupID', group.id);
+    joinBTN.text("+ Join");
+    joinBTN.addClass("btn btn-success");
+    joinBTN.css({
+      float: "right",
+      "margin-top": "-5px"
+    });
 
-  //   //Adding Into the Card
-  //   newGroupTitle.text(group.name + " ");
-  //   newGroupCardHeading.append(joinBTN);
-  //   newGroupCardHeading.append(newGroupTitle);
-  //   newGroupBody.text(group.body);
-  //   newGroupCardBody.append(newGroupBody);
-  //   newGroupCard.append(newGroupCardHeading);
-  //   newGroupCard.append(newGroupCardBody);
-  //   newGroupCard.data("Group", group);
-  //   return newGroupCard;
-  // };
+    //Adding Into the Card
+    newGroupTitle.text("Group Name: " + group.name + " ");
+    newGroupCardHeading.append(joinBTN);
+    newGroupCardHeading.append(newGroupTitle);
+    newGroupBody.append("Group Members: " + users + " <br>" + "Apps in Group: ");
+    newGroupCardBody.append(newGroupBody);
+    newGroupCard.append(newGroupCardHeading);
+    newGroupCard.append(newGroupCardBody);
+    newGroupCard.data("Group", group);
+
+    for (var j = 0; j < userId.length; j++) {
+      var UserId = userId[j];
+
+      console.log(UserId);
+      $.get("/api/list_apps/" + UserId).then(function (data) {
+        console.log(data);
+        switch (data[0].App_name) {
+          case "Netflix":
+            $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_netflix_143870.png' alt='Netflix Icon' value='Netflix'>");
+            break;
+          case "Hulu":
+            $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/hulu-icon.png' alt='Hulu Icon' value='Hulu'>");
+            break;
+          case "Spotify":
+            $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_Spotify_1298766.png' alt='Spotify Icon' value='Spotify'>");
+            break;
+          case "HBO":
+            $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/hbo-now-gift-card-taxon.png' alt='HBO Icon' value='HBO'>");
+            break;
+          case "NyTimes":
+            $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_new_york_times_143900.png' alt='NyTimes Icon' value='NyTimes'>");
+            break;
+        };
+      });
+    };
+    return newGroupCard;
+  };
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-  //Only show when they are in a group
   // -------------------  ADD A SERVICE LOGIC -----------------------//
 
   // Toggle Effect for Service Icons
@@ -272,7 +250,7 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
         width: "54px",
         border: "solid yellow 2px"
       });
-      checkApp($(this).attr("value"));
+      checkApp($(this).attr("value"), $("#member-id").attr("value"));
       $("#ServiceUN").text($(this).attr("value") + " Username");
       $("#ServicePW").text($(this).attr("value") + " Password");
     }
@@ -288,8 +266,9 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
   });
 
   // Checks if User has already added this app
-  function checkApp(appName) {
-    $.get("/api/app_name/" + appName).then(function (data) {
+  function checkApp(appName, id) {
+
+    $.get("/api/app_name/" + appName + "/UserId/" + id).then(function (data) {
       console.log(data);
       if (data[0].App_name === appName) {
         $("#serviceCheck").append("<div class='alert alert-danger' role='alert'>You Already Have this Service</div>")
@@ -304,8 +283,6 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
     var appName = "";
 
-    // Logic to determne which service has been clicked ... annoying coudlnt use .val for this but was the only way i could get it working //
-
     if ($(".serviceIcons.active").length > 0) {
       appName = $(".serviceIcons.active").attr("value");
     };
@@ -315,54 +292,27 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
     var appData = {
       app_username: $("#appUN-input").val().trim(),
       app_password: $("#appPW-input").val().trim(),
-      app: appName
-
+      app: appName,
+      id: $("#member-id").attr("value")
     };
 
     console.log(appData);
 
-    addApp(appData.app, appData.app_username, appData.app_password, $("#member-id").attr("value"), groupid);
+    addApp(appData.app, appData.app_username, appData.app_password, appData.id);
 
   });
 
-  function addApp(app, username, password, id, groupid) {
+  function addApp(app, username, password, id) {
     $.post("/api/addapp", {
       app: app,
       username: username,
       password: password,
+      UserId: id
     }).then(function (data) {
-      console.log("this should be data");
       console.log(data);
-      addUserApp(id, groupid, data.id);
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
   };
-
-  // Creating GroupApp and UserId association
-  function addUserApp(id, groupid, AppId) {
-    $.post("/api/addUserApp_groupapp/", {
-      UserId: id,
-      GroupId: groupid,
-      AppId: AppId
-    }).then(function (data) {
-      console.log(data);
-      $("#AddServiceBTN").show();
-      // If there's an error, handle it by throwing up a bootstrap alert
-    }).catch(handleLoginErr);
-  };
-
-  // ---------------------------------------------------------------//
-  // Adding Service to group
-
-  // $.get("/api/addService_toGroup/" + UserId).then(function (data) {
-  //   console.log(data);
-  //   // for (var i = 0; i < data.length; i++) {
-  //   //   gettingUserName(data[i].UserId, GroupId)
-  //   // }
-  // });
-
-
-
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
   // Add Pending Users
