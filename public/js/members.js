@@ -350,7 +350,8 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
     //Hides the div
     $("#pending" + $(this).attr("class")[0]).hide();
-    console.log("You have approved " + $(this).attr("data-name") + "!!!");
+    console.log("You have approved " + $(this).attr("data-name") + "!!!")
+    .then(window.location.replace("/members"));
   });
 
   function updateRequest(request) {

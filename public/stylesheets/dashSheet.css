@@ -24,11 +24,7 @@ nav {
 .navbar-brand {
  font-size: 30px;
   color: rgb(205, 52, 71)!important;
-  
-  
 }
-
-
 
 /* Changes color when hovering brand */
 .navbar-brand:hover {
@@ -39,11 +35,7 @@ nav {
 
 #mainNav .navbar-toggler {
   font-size: 12px;
-  /* right: 0; */
-  /* padding: 13px; */
   text-transform: uppercase;
- 
-  /* border: 0; */
   background-color: rgb(205, 52, 71);
 }
 
@@ -71,7 +63,6 @@ nav {
   list-style: none;
 }
 
-
 #mainNav .navbar-nav .nav-item .nav-link {
   color: rgb(205, 52, 71);
 }
@@ -81,35 +72,13 @@ nav {
   text-decoration: none;
 }
 
-
-
-@media (min-width: 992px) {
-  #mainNav {
-    padding-top: 25px;
-    padding-bottom: 25px;
-    -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
-    transition: padding-top 0.3s, padding-bottom 0.3s;
-    border: none;
-    background-color: transparent;
-  }
-  #mainNav .navbar-brand {
-    font-size: 1.75em;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-  }
-  #mainNav .navbar-nav .nav-item .nav-link {
-    padding: 1.1em 1em !important;
-  }
-  #mainNav.navbar-shrink {
-    padding-top: 0;
-    padding-bottom: 0;
-    background-color: #212529;
-  }
-  #mainNav.navbar-shrink .navbar-brand {
-    font-size: 1.25em;
-    padding: 12px 0;
+@media (max-width: 450px) {
+  #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item {
+    font-size: 22px;
   }
 }
+/* END NAV */
+
 
 
 /* Member and group ID */
@@ -127,8 +96,8 @@ nav {
 /* Group Icons */
 .groupIcons
 {
-  height: 54px;
-  width: 54px;
+  height: 40px;
+  width: 40px;
   margin: 5px;
 }
 /* Service Icons */
@@ -144,29 +113,23 @@ nav {
 }
 
 
-/* GROUP Row */
-.groupRow {
+/* Table */
+.tableButton {
+  margin: 5px 0;
+}
+.table-responsive-sm {
+  /* border: 5px solid #212529; */
   
 }
-
 /* Buttons */
 /* Create Group */
 #createGroupBTN {
-  /* margin-bottom: 20px;  */
+  /* margin-right: auto; */
 }
 
+/* Add Service */
 
-/* Join Group */
-
-/* #joinGroupBTN {
-  margin: 0 0 0 20px;
-} */
-/* Leave Group */
-/* #leaveGroupBTN {
-  margin: 20px;
+#AddServiceBTN{
+  /* width: 100%;
+  margin-top: 10px; */
 }
-
-/* Delete User */
-/* #deleteUserBTN {
-  margin: 20px;
-} */ 
