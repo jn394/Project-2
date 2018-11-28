@@ -14,13 +14,13 @@
 <body>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <h2>Welcome <span class="member-name"></span></h2>
+      <h2>Welcome <span class="member-name"></span></h2>
       <div class="navbar-header">
         <a class="navbar-brand" href="/logout">
           Logout
         </a>
       </div>
-      
+
     </div>
   </nav>
   <br>
@@ -28,68 +28,115 @@
   <br>
   <br>
 
- 
 
+  <div class="container">
+    <!-- Pending Requests -->
+    <div>
+      <h4>Pending Approval:</h4>
+      <div id="pendingReq"></div>
+    </div>
+    <!-- End Pending Requests -->
+  </div>
 
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
- <!-- Application Data Table - "The Dash" -->
+  <!-- Application Data Table - "The Dash" -->
   <!------------------------------------------------------------------------------------------------------- -->
   <!-- SECOND ROW OF DATA -->
 
 
   <div class="row">
 
-      <!-- BEGIN TABLE -->
-  
-      <div class="col-md-10 offset-md-1 table-responsive-sm" id="dashboardLibrary">
-  
-        <!-- Title -->
-        <br>
-  
-        <h4 id="dashboardHeader">Your Shared Library</h4>
-  
-        <table class="table">
-          <!-- Begin table head -->
-          <thead>
-            <tr>
-              <th scope="col" class="column">App</th>
-              <th scope="col" class="column">Username</th>
-              <th scope="col" class="column">Password</th>
-              <th scope="col" class="column">Provider</th>
-            </tr>
-          </thead>
-          <!-- Begin table body -->
-          <tbody id="dashboardBody">
-            <tr>
-              <td id="appSpot"> Shared Application / Link to Site </td>
-              <td id="userSpot"> Username </td>
-              <td id="passSpot"> Hidden Password </td>
-              <td id="sharerSpot"> Owner of the Account</td>
-  
-          </tbody>
-          <!-- End table -->
-        </table>
+    <!-- BEGIN TABLE -->
+
+    <div class="col-md-10 offset-md-1 table-responsive-sm" id="dashboardLibrary">
+
+      <!-- Title -->
+      <br>
+
+      <h4 id="dashboardHeader">Your Shared Library</h4>
+
+      <table class="table">
+        <!-- Begin table head -->
+        <thead>
+          <tr>
+            <th scope="col" class="column">App</th>
+            <th scope="col" class="column">Username</th>
+            <th scope="col" class="column">Password</th>
+            <th scope="col" class="column">Provider</th>
+          </tr>
+        </thead>
+        <!-- Begin table body -->
+        <tbody id="dashboardBody">
+          <tr>
+            <td id="appSpot"> Shared Application / Link to Site </td>
+            <td id="userSpot"> Username </td>
+            <td id="passSpot"> Hidden Password </td>
+            <td id="sharerSpot"> Owner of the Account</td>
+
+        </tbody>
+
+        <!-- End table -->
+      </table>
+      <hr>
+      <div class="row">
+        <div class=" col-md-6">
+          <!-- Create group Button  -->
+          <button type="button" id="createGroupBTN" class="btn col-5 btn-danger tableButton" data-toggle="modal"
+            data-target="#signInModal">
+            Create A Group
+          </button>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class=" col-md-6">
+          <!-- Button trigger modal -->
+          <button id="joinGroupBTN" type="button" class="btn col-5 btn-secondary tableButton" data-toggle="modal"
+            data-target="#groupSearch-Modal">
+            Join A Group
+          </button>
+        </div>
+
+        <div class=" col-md-6">
+          <!-- Leave Group BUTTON  -->
+          <button type="button" id="leaveGroupBTN" class="btn btn-secondary col-5 float-right tableButton"><a href="#signup"></a>
+            Leave Group
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-md-6">
+          <!-- Start Adding Services -->
+          <!-- Button trigger modal -->
+          <button id="AddServiceBTN" type="button" class="btn col-5  btn-danger tableButton" data-toggle="modal"
+            data-target="#AddService-Modal">
+            Add Service
+          </button>
+        </div>
+
+        <div class=" col-md-6">
+
+          <!-- Delete Account BUTTON  -->
+          <button type="button" id="deleteUserBTN" class="btn col-5 float-right btn-danger tableButton"><a href="#signup"></a>
+            Delete Account
+          </button>
+        </div>
       </div>
     </div>
-  
-    <div>
-      <br><br>
-    </div>
-  
-  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
-  <div class="container">
-    <!-- Create group Button  -->
-    <div class="row groupRow">
-      <button type="button" id="createGroupBTN" class="btn col-6 btn-secondary" data-toggle="modal" data-target="#signInModal">
-        Create A Group
-      </button>
 
-      <!-- Button trigger modal -->
-      <button id="joinGroupBTN" type="button" class="btn col-6  btn-danger" data-toggle="modal" data-target="#groupSearch-Modal">
-        Join A Group
-      </button>
-    </div>
   </div>
+
+
+
+
+
+  <div>
+    <br><br>
+  </div>
+
+  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+  
   <!-- START SIGN IN MODAL -->
 
 
@@ -173,13 +220,8 @@
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
 
   <div class="container">
-    <!-- Start Adding Services -->
-    <div class="row">
-      <!-- Button trigger modal -->
-      <button id="AddServiceBTN" type="button" class="btn btn-danger" data-toggle="modal" data-target="#AddService-Modal">
-        Add Services
-      </button>
-    </div>
+
+  </div>
   </div>
   <!-- Modal -->
   <div class="modal fade" id="AddService-Modal" tabindex="-1" role="dialog" aria-labelledby="AddService-Modal-Label"
@@ -231,34 +273,8 @@
   <!-- End Adding Services -->
 
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
-<div class ="container">
-  <!-- Pending Requests -->
-  <div>
-    <h4>Pending Approval:</h4>
-    <div id="pendingReq"></div>
-  </div>
-  <!-- End Pending Requests -->
-</div>
 
 
-
-
-
-
-<div class = "container">
-  <!-- Leave Group BUTTON  -->
-  <div class="row">
-    <button type="button" id="leaveGroupBTN" class="btn btn-danger"><a href="#signup"></a>
-      Leave Group
-    </button>
-
-    <!-- Delete Account BUTTON  -->
-    <button type="button" id="deleteUserBTN" class="btn btn-warning" style='cursor:pointer;color:red'><a href="#signup"></a>
-      Delete Account
-    </button>
-  </div>
-</div>
- 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
