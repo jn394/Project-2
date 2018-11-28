@@ -1,8 +1,8 @@
 $(document).ready(function () {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page  
-$(document).on("click", "#deleteUserBTN", deleteUser);
-$(document).on("click", "#leaveGroupBTN", leaveGroup);
+  $(document).on("click", "#deleteUserBTN", deleteUser);
+  $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
 
 
@@ -136,7 +136,7 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
         }
 
         $("#searchResults").append(createNewRow(data[i], groupId, listOfMembers, listOfMemberIds));
-        
+
       };
     });
   });
@@ -621,27 +621,27 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
 
 
-function deleteUser(event) {  
+function deleteUser(event) {
   $.get("/api/user_data").then(function (data) {
-    console.log(data.id + " is deleting their user account!");   
+    console.log(data.id + " is deleting their user account!");
     event.stopPropagation();
     var person = prompt("Are you sure you want to delete your Account?  A deleted account cannot be recovered. Type 'DELETE' and press ok to continue");
     var id = data.id;
-    
+
     if (person !== "DELETE") {
       alert("User cancelled delete request.");
     }
-      else {
+    else {
 
-    $.ajax({
-      method: "DELETE",
-      url: "/api/user_data_delete/" + id
-    })
-      .then(console.log("User Removed!"),
-      window.location.replace("/"));
-   
-  }
- 
+      $.ajax({
+        method: "DELETE",
+        url: "/api/user_data_delete/" + id
+      })
+        .then(console.log("User Removed!"),
+          window.location.replace("/"));
+
+    }
+
     // TODO:  this location.reload does not work.  Need ajax hijacking to trigger a function that reloads the page.
   })
 };
@@ -728,6 +728,70 @@ function fillTable(rows) {
     $("#dashboardBody").prepend(rows);
   }
   else {
-    return 
+    return
   }
 }
+
+
+
+$.get("/api/dashboard").then(function (data) {
+  console.log(data);
+  for (var i = 0; i < data.length; i++) {
+    console.log(data[i]);
+    var members = data[i].Users;
+    var listOfMembers = [];
+    var listOfMemberIds = [];
+    var groupId = data[i].id;
+
+    for (var j = 0; j < members.length; j++) {
+      listOfMembers.push(members[j].name);
+      listOfMemberIds.push(members[j].id);
+    }
+
+    $("#searchResults").append(createNewRow(data[i], groupId, listOfMembers, listOfMemberIds));
+
+  };
+});
+
+function createNewRow(group, groupId, users, userId) {
+
+  //Setting Up the Card
+  var newAppRow = $("<tr>").append(
+    // App image / which is also a link will replace data.x below...
+    $("<td>").text(data.X),
+    // App username, represented by a button, will replace data.y below...
+    $("<td>").text(data.Y),
+    // App password, represented by a button, will replace data.z below...
+    $("<td>").text(data.Z),
+    // Auser who provides the application, will replace data.Name...
+    $("<td>").text(data.Name));
+
+  // for (var j = 0; j < userId.length; j++) {
+  //   var UserId = userId[j];
+
+  //   console.log(UserId);
+  //   $.get("/api/list_apps/" + UserId).then(function (data) {
+  //     console.log(data);
+  //     switch (data[0].App_name) {
+  //       case "Netflix":
+  //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_netflix_143870.png' alt='Netflix Icon' value='Netflix'>");
+  //         break;
+  //       case "Hulu":
+  //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/hulu-icon.png' alt='Hulu Icon' value='Hulu'>");
+  //         break;
+  //       case "Spotify":
+  //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_Spotify_1298766.png' alt='Spotify Icon' value='Spotify'>");
+  //         break;
+  //       case "HBO":
+  //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/hbo-now-gift-card-taxon.png' alt='HBO Icon' value='HBO'>");
+  //         break;
+  //       case "NyTimes":
+  //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_new_york_times_143900.png' alt='NyTimes Icon' value='NyTimes'>");
+  //         break;
+  //     };
+  //   });
+  // };
+
+
+  return newAppRow;
+};
