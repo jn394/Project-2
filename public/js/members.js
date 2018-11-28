@@ -192,7 +192,7 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
     joinBTN.attr('data-dismiss', 'modal');
     joinBTN.attr('data-groupID', group.id);
     joinBTN.text("+ Join");
-    joinBTN.addClass("btn btn-success");
+    joinBTN.addClass("btn btn-danger");
     joinBTN.css({
       float: "right",
       "margin-top": "-5px"
@@ -330,7 +330,7 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
     $.get("/api/display_pendingUsers/" + id).then(function (data) {
       console.log(data);
       for (var i = 0; i < data.length; i++) {
-        $("#pendingReq").append("<div id=pending" + [i] + " >" + data[i].name + " would love to join your group!" + "<button class='" + [i] + " acceptPendingUser btn btn-success ml-2' data-name =" + data[i].name + " data-userID =" + id + " data-groupID=" + GroupId + " type='button'>Appove</button>" +
+        $("#pendingReq").append("<div id=pending" + [i] + " >" + data[i].name + " would love to join your group!" + "<button class='" + [i] + " acceptPendingUser btn btn-danger ml-2' data-name =" + data[i].name + " data-userID =" + id + " data-groupID=" + GroupId + " type='button'>Approve</button>" +
           "<hr>");
       }
     });
