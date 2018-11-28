@@ -99,16 +99,16 @@ $(document).ready(function () {
       for (var i = 0; i < data.length; i++) {
         console.log(data[i]);
         var members = data[i].Users;
-        var listOfMembers = [];
-        var listOfMemberIds = [];
+        var listOfMembersJoin = [];
+        var listOfMemberIdsJoin = [];
         var groupId = data[i].id;
 
         for (var j = 0; j < members.length; j++) {
-          listOfMembers.push(members[j].name);
-          listOfMemberIds.push(members[j].id);
+          listOfMembersJoin.push(members[j].name);
+          listOfMemberIdsJoin.push(members[j].id);
         }
 
-        $("#searchResults").append(createNewRow(data[i], groupId, listOfMembers, listOfMemberIds));
+        $("#searchResults").append(createNewRow(data[i], groupId, listOfMembersJoin, listOfMemberIdsJoin));
 
       };
     });
@@ -127,16 +127,16 @@ $(document).ready(function () {
         // Put either List View or Card View
         console.log(data[i]);
         var members = data[i].Users;
-        var listOfMembers = [];
-        var listOfMemberIds = [];
+        var listOfMembersJoin = [];
+        var listOfMemberIdsJoin = [];
         var groupId = data[i].id;
 
         for (var j = 0; j < members.length; j++) {
-          listOfMembers.push(members[j].name);
-          listOfMemberIds.push(members[j].id);
+          listOfMembersJoin.push(members[j].name);
+          listOfMemberIdsJoin.push(members[j].id);
         }
 
-        $("#searchResults").append(createNewRow(data[i], groupId, listOfMembers, listOfMemberIds));
+        $("#searchResults").append(createNewRow(data[i], groupId, listOfMembersJoin, listOfMemberIdsJoin));
 
       };
     });
@@ -352,7 +352,7 @@ $(document).ready(function () {
     //Hides the div
     $("#pending" + $(this).attr("class")[0]).hide();
     console.log("You have approved " + $(this).attr("data-name") + "!!!")
-      .then(window.location.replace("/members"));
+     
   });
 
   function updateRequest(request) {
@@ -363,6 +363,7 @@ $(document).ready(function () {
     })
       .then(function (data) {
         console.log(data);
+      window.location.replace("/members");
       });
   }
 
@@ -644,18 +645,12 @@ $(document).ready(function () {
           url: "/api/user_data_delete/" + id
         })
           .then(console.log("User Removed!"),
-            window.location.replace("/"));
+          window.location.replace("/logout"));
 
       }
 
-
     })
   };
-
-
-
-
-
 
 
 
