@@ -266,7 +266,7 @@ module.exports = function (app) {
     db.Usergroup.findAll({
       where: {
         UserId: req.params.UserId,
-        Admin: true
+      
       }
     }).then(function (data) {
       res.json(data);
@@ -313,6 +313,7 @@ app.delete("/api/user_data_leave/:UserId", function(req, res) {
 });
 
 
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 // Dashboard Display
 
@@ -337,6 +338,7 @@ app.get("/api/list_apps_dashboard/:memberid", function (req, res) {
     where: {
       UserId: req.params.memberid
     }
+
   }).then(function (data) {
     res.json(data);
   });
@@ -344,4 +346,18 @@ app.get("/api/list_apps_dashboard/:memberid", function (req, res) {
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    // To get Group ID 
+app.get("/api/group_id_check/:UserId", function (req, res) {
+  db.Usergroup.findAll({
+    where: {
+      UserId: req.params.UserId,
+      }
+
+  }).then(function (data) {
+    res.json(data);
+  });
+});
+    
+    
+    
 };

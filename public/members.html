@@ -7,44 +7,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
   <link href="stylesheets/dashSheet.css" rel="stylesheet">
 </head>
 
 <body>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
+      <h2>Welcome <span class="member-name"></span></h2>
       <div class="navbar-header">
         <a class="navbar-brand" href="/logout">
           Logout
         </a>
       </div>
+
     </div>
   </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Welcome <span class="member-name"></span></h2>
-      </div>
-    </div>
-  </div>
-
+  <br>
+  <br>
+  <br>
   <br>
 
-  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
-  <!-- Adding Service to group -->
-  <div id="yourServices">Your Services</div>
 
-  <div id="testing">SHoULD Show up</div>
-
-  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
-
-  <!-- Create group Button  -->
-  <div class="row" id="createGroupBTN">
-    <button type="button" id="createGroupBTN" class="btn btn-secondary" data-toggle="modal" data-target="#signInModal">
-      Create A Group
-    </button>
+  <div class="container">
+    <!-- Pending Requests -->
+    <div>
+      <h4>Pending Approval:</h4>
+      <div id="pendingReq"></div>
+    </div>
+    <!-- End Pending Requests -->
   </div>
 
+  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+  <!-- Application Data Table - "The Dash" -->
+  <!------------------------------------------------------------------------------------------------------- -->
+  <!-- SECOND ROW OF DATA -->
+
+
+  <div class="row">
+
+    <!-- BEGIN TABLE -->
+
+    <div class="col-md-10 offset-md-1 table-responsive-sm" id="dashboardLibrary">
+
+      <!-- Title -->
+      <br>
+
+      <h4 id="dashboardHeader">Your Shared Library</h4>
+
+      <table class="table">
+        <!-- Begin table head -->
+        <thead>
+          <tr>
+            <th scope="col" class="column">App</th>
+            <th scope="col" class="column">Username</th>
+            <th scope="col" class="column">Password</th>
+            <th scope="col" class="column">Provider</th>
+          </tr>
+        </thead>
+        <!-- Begin table body -->
+        <tbody id="dashboardBody">
+          <tr>
+            <td id="appSpot"> Shared Application / Link to Site </td>
+            <td id="userSpot"> Username </td>
+            <td id="passSpot"> Hidden Password </td>
+            <td id="sharerSpot"> Owner of the Account</td>
+
+        </tbody>
+
+        <!-- End table -->
+      </table>
+      <hr>
+      <div class="row">
+        <div class=" col-md-6">
+          <!-- Create group Button  -->
+          <button type="button" id="createGroupBTN" class="btn col-5 btn-danger tableButton" data-toggle="modal"
+            data-target="#signInModal">
+            Create A Group
+          </button>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class=" col-md-6">
+          <!-- Button trigger modal -->
+          <button id="joinGroupBTN" type="button" class="btn col-5 btn-secondary tableButton" data-toggle="modal"
+            data-target="#groupSearch-Modal">
+            Join A Group
+          </button>
+        </div>
+
+        <div class=" col-md-6">
+          <!-- Leave Group BUTTON  -->
+          <button type="button" id="leaveGroupBTN" class="btn btn-secondary col-5 float-right tableButton"><a href="#signup"></a>
+            Leave Group
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-md-6">
+          <!-- Start Adding Services -->
+          <!-- Button trigger modal -->
+          <button id="AddServiceBTN" type="button" class="btn col-5  btn-danger tableButton" data-toggle="modal"
+            data-target="#AddService-Modal">
+            Add Service
+          </button>
+        </div>
+
+        <div class=" col-md-6">
+
+          <!-- Delete Account BUTTON  -->
+          <button type="button" id="deleteUserBTN" class="btn col-5 float-right btn-danger tableButton"><a href="#signup"></a>
+            Delete Account
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div>
+    <br><br>
+  </div>
+
+  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+  
   <!-- START SIGN IN MODAL -->
 
 
@@ -74,7 +166,7 @@
         <!-- MODAL FOOTER -->
         <div class="modal-footer">
           <!-- SUBMIT BUTTON -->
-          <button type="submit" class="btn btn-primary" id="submitgroup" data-dismiss="modal">Submit</button>
+          <button type="submit" class="btn btn-danger" id="submitgroup" data-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -94,10 +186,7 @@
   <!-- Displaying that you joined the group -->
   <div id="displayGroup"></div>
 
-  <!-- Button trigger modal -->
-  <button id="joinGroupBTN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#groupSearch-Modal">
-    Join A Group
-  </button>
+
 
   <!-- Modal -->
   <div class="modal fade" id="groupSearch-Modal" tabindex="-1" role="dialog" aria-labelledby="groupSearch-Modal-Label"
@@ -114,7 +203,7 @@
           <nav class="navbar navbar-light bg-light">
             <form class="form-inline">
               <input id="groupSearch-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button id="groupSearchBTN" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <button id="groupSearchBTN" class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
             </form>
           </nav>
           <h4>Groups:</h4>
@@ -130,13 +219,10 @@
 
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
 
-  <!-- Start Adding Services -->
+  <div class="container">
 
-  <!-- Button trigger modal -->
-  <button id="AddServiceBTN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddService-Modal">
-    Add Services
-  </button>
-
+  </div>
+  </div>
   <!-- Modal -->
   <div class="modal fade" id="AddService-Modal" tabindex="-1" role="dialog" aria-labelledby="AddService-Modal-Label"
     aria-hidden="true">
@@ -188,15 +274,6 @@
 
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
 
-  <!-- Pending Requests -->
-  <div>
-    <h4>Pending Approval:</h4>
-    <div id="pendingReq"></div>
-  </div>
-  <!-- End Pending Requests -->
-
-
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -204,71 +281,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/members.js"></script>
-
-
-
-  <!-- Leave Group BUTTON  -->
-  <div class="row" id="leaveGroupBTN">
-    <button type="button" id="leaveGroupBTN" class="btn btn-secondary" style='cursor:pointer;color:goldenrod'><a href="#signup"></a>
-      Leave Group
-    </button>
-  </div>
-
-
-
-
-  <!-- Delete Account BUTTON  -->
-  <div class="row" id="deleteUserBTN">
-    <button type="button" id="deleteUserBTN" class="btn btn-secondary" style='cursor:pointer;color:red'><a href="#signup"></a>
-      Delete Account
-    </button>
-  </div>
-
-  <!-- Application Data Table - "The Dash" -->
-  <!------------------------------------------------------------------------------------------------------- -->
-  <!-- SECOND ROW OF DATA -->
-  
-
-  <div class="row">
-
-       <!-- BEGIN TABLE -->
-    
-       <div class="col-md-10 offset-md-1 table-responsive-sm" id="dashboardLibrary">
-      
-        <!-- Title -->
-        <br>
-
-      <h4 id="dashboardHeader">Your Shared Library</h4>
-     
-      <table class="table">
-        <!-- Begin table head -->
-        <thead>
-          <tr>
-            <th scope="col" class="column">App</th>
-            <th scope="col" class="column">Username</th>
-            <th scope="col" class="column">Password</th>
-            <th scope="col" class="column">Provider</th>
-          </tr>
-        </thead>
-        <!-- Begin table body -->
-        <tbody id="dashboardBody">
-          <tr>
-            <td id="appSpot"> Shared Application / Link to Site </td>
-            <td id="userSpot"> Username </td>
-            <td id="passSpot"> Hidden Password </td>
-            <td id="sharerSpot"> Owner of the Account</td>
-
-        </tbody>
-        <!-- End table -->
-      </table>
-    </div>
-  </div>
-
-  <div>
-    <br><br>
-  </div>
-
-
 </body>
 
 </html>
