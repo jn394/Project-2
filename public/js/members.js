@@ -1,13 +1,14 @@
 $(document).ready(function () {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page  
-$(document).on("click", "#deleteUserBTN", deleteUser);
-$(document).on("click", "#leaveGroupBTN", leaveGroup);
+  $(document).on("click", "#deleteUserBTN", deleteUser);
+  $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
 
 
   $.get("/api/user_data").then(function (data) {
     $(".member-name").text(data.email);
+    $("#leaveGroupBTN").hide(),
 
 
     // ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,7 +137,7 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
         }
 
         $("#searchResults").append(createNewRow(data[i], groupId, listOfMembers, listOfMemberIds));
-        
+
       };
     });
   });
@@ -280,7 +281,7 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
     event.preventDefault();
 
     console.log("clicked add!!");
-
+    
     var appName = "";
 
     if ($(".serviceIcons.active").length > 0) {
@@ -288,7 +289,7 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
     };
 
     console.log(appName, "App name ------");
-
+    $("#AddServiceBTN").hide();
     var appData = {
       app_username: $("#appUN-input").val().trim(),
       app_password: $("#appPW-input").val().trim(),
@@ -351,7 +352,7 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
     //Hides the div
     $("#pending" + $(this).attr("class")[0]).hide();
     console.log("You have approved " + $(this).attr("data-name") + "!!!")
-    .then(window.location.replace("/members"));
+      .then(window.location.replace("/members"));
   });
 
   function updateRequest(request) {
@@ -415,6 +416,9 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
             $("#AddServiceBTN").show();
             pendingUsers(UserDataAdminCheck);
             console.log("Checking to see if there are Users Requests for your Group")
+            groupIDCheck();
+            
+            // JAY ADD Displaydash here 
           }
           //Step 3B, if Admin is false, run check to see if user is Pending themselves  THIS DOES NOT WORK YET ---------------------------------------------------------------------
 
@@ -426,30 +430,25 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
       });
     });
 
-    function pendingUsers2(data1) {
-      $.get("/api/pending_users/" + data1).then(function (data) {
+    function pendingUsers2(UserDataAdminCheck) {
+      console.log(UserDataAdminCheck);
+      $.get("/api/display_pendingUsers/" + UserDataAdminCheck).then(function (data) {
         console.log(data);
         console.log("Let's see if you have made a pending request!")
         for (var i = 0; i < data.length; i++) {
-          gettingUserName2(data[i].UserId, GroupId)
-        }
-      });
-    };
-
-    function gettingUserName2(id) {
-      $.get("/api/display_pendingUsers/" + id).then(function (data) {
-        console.log(data);
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].Pending = true) {
+          if (data[i].Pending === 1) {
             console.log("Your request is pending approval with the group admin!")
-          }
-          else
-            // TODO: INSERT Function that generates Dashboard table HERE
-            console.log("\n\n\n\n\n\n\n\n\n\n\n\nTHIS IS WHERE WE DISPLAY EVERYTHING")
         }
+        else
+        // TODO: INSERT Function that generates Dashboard table HERE
+        console.log("\n\n\n\n\n\n\n\n\n\n\n\nTHIS IS WHERE WE DISPLAY EVERYTHING")
+        groupIDCheck()
+        // Jay PUT THE SHIT HERE.
+    }
+      
       });
     };
-  };
+   };
 
 
 
@@ -473,13 +472,18 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
 
 
+function groupIDCheck() {
+  $.get("/api/user_data").then(function (data) {
+    console.log(data.id);
 
-
-
-
-
-
-
+    $.get("/api/group_id_check/" + data.id).then(function (data) {
+      console.log(data);
+      var groupId = data[0].GroupId
+      console.log("This is THE Group ID you are looking for " + groupId);
+     
+      });
+    })
+  };
 
 
 
@@ -622,27 +626,27 @@ $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
 
 
-function deleteUser(event) {  
+function deleteUser(event) {
   $.get("/api/user_data").then(function (data) {
-    console.log(data.id + " is deleting their user account!");   
+    console.log(data.id + " is deleting their user account!");
     event.stopPropagation();
     var person = prompt("Are you sure you want to delete your Account?  A deleted account cannot be recovered. Type 'DELETE' and press ok to continue");
     var id = data.id;
-    
+
     if (person !== "DELETE") {
       alert("User cancelled delete request.");
     }
-      else {
+    else {
 
-    $.ajax({
-      method: "DELETE",
-      url: "/api/user_data_delete/" + id
-    })
-      .then(console.log("User Removed!"),
-      window.location.replace("/"));
-   
-  }
- 
+      $.ajax({
+        method: "DELETE",
+        url: "/api/user_data_delete/" + id
+      })
+        .then(console.log("User Removed!"),
+          window.location.replace("/"));
+
+    }
+
     // TODO:  this location.reload does not work.  Need ajax hijacking to trigger a function that reloads the page.
   })
 };
@@ -675,15 +679,15 @@ function leaveGroup(event) {
 
 function hidebuttons() {
   $("#createGroupBTN").hide(),
-    $("#joinGroupBTN").hide();
-  $("#leaveGroupBTN").show();
+    $("#joinGroupBTN").hide(),
+    $("#leaveGroupBTN").show();
 };
 
 
 function showbuttons() {
   $("#createGroupBTN").show(),
-    $("#joinGroupBTN").show();
-  $("#leaveGroupBTN").hide();
+    $("#joinGroupBTN").show(),
+    $("#leaveGroupBTN").hide();
 };
 
 
@@ -729,6 +733,6 @@ function fillTable(rows) {
     $("#dashboardBody").prepend(rows);
   }
   else {
-    return 
+    return
   }
 }

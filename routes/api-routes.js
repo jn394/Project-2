@@ -281,7 +281,7 @@ module.exports = function (app) {
     db.Usergroup.findAll({
       where: {
         UserId: req.params.UserId,
-        Admin: true
+      
       }
     }).then(function (data) {
       res.json(data);
@@ -328,8 +328,16 @@ app.delete("/api/user_data_leave/:UserId", function(req, res) {
 });
 
 
-
-
+// To get Group ID 
+app.get("/api/group_id_check/:UserId", function (req, res) {
+  db.Usergroup.findAll({
+    where: {
+      UserId: req.params.UserId,
+      }
+  }).then(function (data) {
+    res.json(data);
+  });
+});
 
 
 
