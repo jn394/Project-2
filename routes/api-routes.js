@@ -232,6 +232,10 @@ module.exports = function (app) {
     });
   });
 
+
+
+
+
   //Approving User
   app.put("/api/approve_user", function (req, res) {
     db.Usergroup.update(
@@ -307,8 +311,8 @@ app.delete("/api/user_data_leave/:UserId", function(req, res) {
     where: {
       UserId: req.params.UserId
     }
-  }).then(function(dbUser) {
-    res.json(dbUser);
+  }).then(function(data) {
+    res.json(data);
   });
 });
 
@@ -316,6 +320,21 @@ app.delete("/api/user_data_leave/:UserId", function(req, res) {
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 // Dashboard Display
+
+
+  // Displaying Pending Users
+  app.get("/api/pendingUsers_display/:UserId", function (req, res) {
+    db.Usergroup.findAll({
+      where: {
+        UserId: req.params.UserId,
+             }
+    }).then(function (data) {
+      res.json(data);
+    });
+  });
+
+
+
 
 app.get("/api/dashboard/:GroupId", function (req, res) {
   db.Group.findAll({

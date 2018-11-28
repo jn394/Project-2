@@ -3,8 +3,9 @@ $(document).ready(function () {
   // and updates the HTML on the page  
   $(document).on("click", "#deleteUserBTN", deleteUser);
   $(document).on("click", "#leaveGroupBTN", leaveGroup);
-
+  $(".alert").hide();
   $("#clipboardStuff").hide();
+  
 
   $.get("/api/user_data").then(function (data) {
     $(".member-name").text(data.email);
@@ -77,8 +78,8 @@ $(document).ready(function () {
       console.log(data);
       hidebuttons();
       $("#displayGroup").append("\n  AYYYY!! You have Made the Group: " + data.GroupId);
-
-      // $("#joinGroupBTN").hide();
+      groupIDCheck()
+      
 
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
@@ -161,8 +162,10 @@ $(document).ready(function () {
       console.log(data);
       $("#displayGroup").append("Congratz!! You have requested to join Group #: " + data.GroupId);
       hidebuttons();
-      // $("#joinGroupBTN").hide();
-
+            // $("#joinGroupBTN").hide();
+            
+      $("#dashboard").empty();
+      admincheck();
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
   });
@@ -311,7 +314,7 @@ $(document).ready(function () {
       UserId: id
     }).then(function (data) {
       console.log(data);
-      // If there's an error, handle it by throwing up a bootstrap alert
+           // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
   };
 
@@ -334,6 +337,7 @@ $(document).ready(function () {
         $("#pendingReq").append("<div id=pending" + [i] + " >" + data[i].name + " would love to join your group!" + "<button class='" + [i] + " acceptPendingUser btn btn-danger ml-2' data-name =" + data[i].name + " data-userID =" + id + " data-groupID=" + GroupId + " type='button'>Approve</button>" +
           "<hr>");
       }
+      $(".alert").show();
     });
   };
 
@@ -418,7 +422,7 @@ $(document).ready(function () {
             pendingUsers(UserDataAdminCheck);
             console.log("Checking to see if there are Users Requests for your Group")
             groupIDCheck();
-            // console.log(groupIdCheckValue);
+                        // console.log(groupIdCheckValue);
             // JAY ADD Displaydash here 
             // displayDash(groupIdCheckValue);
           }
@@ -434,11 +438,13 @@ $(document).ready(function () {
 
     function pendingUsers2(UserDataAdminCheck) {
       console.log(UserDataAdminCheck);
-      $.get("/api/display_pendingUsers/" + UserDataAdminCheck).then(function (data) {
+      $.get("/api/pendingUsers_display/" + UserDataAdminCheck).then(function (data) {
         console.log(data);
         console.log("Let's see if you have made a pending request!")
         for (var i = 0; i < data.length; i++) {
-          if (data[i].Pending === 1) {
+          if (data[i].Pending === true) {
+            $("#dashboard").empty();
+            $("#dashboard").append("<strong>Your request is pending approval with the group admin!</strong>");
             console.log("Your request is pending approval with the group admin!")
           }
           else
@@ -452,178 +458,16 @@ $(document).ready(function () {
     };
   };
 
-
-  // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // var groupIdCheckValue = "";
-
-
-
   function groupIDCheck() {
     $.get("/api/user_data").then(function (data) {
       console.log(data.id);
-
       $.get("/api/group_id_check/" + data.id).then(function (data) {
-        console.log(data);
-        var groupId = data[0].GroupId;
+         var groupId = data[0].GroupId;
         console.log("This is THE Group ID you are looking for " + groupId);
         displayDash(groupId);
       });
     })
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // I think the double function execution is happening as a result of the "$(document).on("click", "#deleteUserBTN", deleteUser);"
-  // This code below is me trying to fix that.
-  // // Group Creation Button Functionality / Event Listener
-  // $("#deleteUserBTN").on("click", function (event) {
-  //   deleteUser() 
-  //   console.log("Delete Clicked");
-  //   event.preventDefault();
-  // });
-
-
-  // $("#leaveGroupBTN").on("click", function (event) {
-  //   leaveGroup();
-  //   console.log("Leave Group Clicked");
-  //   event.preventDefault();
-  // });
-
-
-
 
 
 
@@ -659,6 +503,7 @@ $(document).ready(function () {
       console.log(data.id);
       event.stopPropagation();
       var UserId = data.id;
+      $("#dashboard").empty();
 
 
       $.ajax({
@@ -667,6 +512,7 @@ $(document).ready(function () {
       })
         .then(console.log("User Left Group!"),
           showbuttons())
+          
     }
 
 
@@ -706,6 +552,7 @@ $(document).ready(function () {
     $.get("/api/dashboard/" + GroupId).then(function (data) {
       console.log(data[0]);
       var users = data[0].Users
+      $("#dashboardHeader").text(data[0].name + " Shared Library");
       // var listOfMembers = [];
       // var listOfMemberIds = [];
       // var listOfApps = [];

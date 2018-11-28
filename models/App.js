@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
 
     App.belongsTo(models.User, {
       foreignKey: {
-        allowNull: false
+        
       }
     });
   };
