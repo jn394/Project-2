@@ -99,14 +99,34 @@ nav {
   height: 40px;
   width: 40px;
   margin: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 /* Service Icons */
 .serviceIcons {
   height: 54px;
   width: 54px;
   margin: 10px;
+  transition: all .2s ease-in-out;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.serviceIcons:hover {
+  transform: scale(1.1);
+}
+
+/* Link Icons */
+.linkIcons
+{
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+  transition: all .2s ease-in-out;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.linkIcons:hover {
+  transform: scale(1.1);
+}
 /* Section headings positioning */
 .section-headingAbout {
   margin-top: 10px;

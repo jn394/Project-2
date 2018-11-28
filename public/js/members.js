@@ -11,11 +11,11 @@ $(document).ready(function () {
     $("#leaveGroupBTN").hide(),
 
 
-    // ----------------------------------------------------------------------------------------------------------------------------------------------------
-    // Join Group Code
+      // ----------------------------------------------------------------------------------------------------------------------------------------------------
+      // Join Group Code
 
-    // Need this for the "joinAGroupBTN" post request
-    $("#member-id").text(data.id);
+      // Need this for the "joinAGroupBTN" post request
+      $("#member-id").text(data.id);
     $("#member-id").attr("value", data.id);
     console.log(data.id);
 
@@ -281,7 +281,7 @@ $(document).ready(function () {
     event.preventDefault();
 
     console.log("clicked add!!");
-    
+
     var appName = "";
 
     if ($(".serviceIcons.active").length > 0) {
@@ -417,8 +417,9 @@ $(document).ready(function () {
             pendingUsers(UserDataAdminCheck);
             console.log("Checking to see if there are Users Requests for your Group")
             groupIDCheck();
-            
+            // console.log(groupIdCheckValue);
             // JAY ADD Displaydash here 
+            // displayDash(groupIdCheckValue);
           }
           //Step 3B, if Admin is false, run check to see if user is Pending themselves  THIS DOES NOT WORK YET ---------------------------------------------------------------------
 
@@ -438,17 +439,17 @@ $(document).ready(function () {
         for (var i = 0; i < data.length; i++) {
           if (data[i].Pending === 1) {
             console.log("Your request is pending approval with the group admin!")
+          }
+          else
+            // TODO: INSERT Function that generates Dashboard table HERE
+            console.log("\n\n\n\n\n\n\n\n\n\n\n\nTHIS IS WHERE WE DISPLAY EVERYTHING")
+          groupIDCheck()
+          // Jay PUT THE SHIT HERE.
         }
-        else
-        // TODO: INSERT Function that generates Dashboard table HERE
-        console.log("\n\n\n\n\n\n\n\n\n\n\n\nTHIS IS WHERE WE DISPLAY EVERYTHING")
-        groupIDCheck()
-        // Jay PUT THE SHIT HERE.
-    }
-      
+
       });
     };
-   };
+  };
 
 
   // });
@@ -468,19 +469,19 @@ $(document).ready(function () {
 
 
 
+  // var groupIdCheckValue = "";
 
 
 
+  function groupIDCheck() {
+    $.get("/api/user_data").then(function (data) {
+      console.log(data.id);
 
-function groupIDCheck() {
-  $.get("/api/user_data").then(function (data) {
-    console.log(data.id);
-
-    $.get("/api/group_id_check/" + data.id).then(function (data) {
-      console.log(data);
-      var groupId = data[0].GroupId
-      console.log("This is THE Group ID you are looking for " + groupId);
-     
+      $.get("/api/group_id_check/" + data.id).then(function (data) {
+        console.log(data);
+        var groupId = data[0].GroupId;
+        console.log("This is THE Group ID you are looking for " + groupId);
+        displayDash(groupId);
       });
     })
   };
@@ -625,31 +626,31 @@ function groupIDCheck() {
 
 
 
-  
-function deleteUser(event) {
-  $.get("/api/user_data").then(function (data) {
-    console.log(data.id + " is deleting their user account!");
-    event.stopPropagation();
-    var person = prompt("Are you sure you want to delete your Account?  A deleted account cannot be recovered. Type 'DELETE' and press ok to continue");
-    var id = data.id;
 
-    if (person !== "DELETE") {
-      alert("User cancelled delete request.");
-    }
-    else {
+  function deleteUser(event) {
+    $.get("/api/user_data").then(function (data) {
+      console.log(data.id + " is deleting their user account!");
+      event.stopPropagation();
+      var person = prompt("Are you sure you want to delete your Account?  A deleted account cannot be recovered. Type 'DELETE' and press ok to continue");
+      var id = data.id;
 
-      $.ajax({
-        method: "DELETE",
-        url: "/api/user_data_delete/" + id
-      })
-        .then(console.log("User Removed!"),
-          window.location.replace("/"));
+      if (person !== "DELETE") {
+        alert("User cancelled delete request.");
+      }
+      else {
 
-    }
+        $.ajax({
+          method: "DELETE",
+          url: "/api/user_data_delete/" + id
+        })
+          .then(console.log("User Removed!"),
+            window.location.replace("/"));
 
-    
-  })
-};
+      }
+
+
+    })
+  };
 
 
 
@@ -673,24 +674,24 @@ function deleteUser(event) {
           showbuttons())
     }
 
-      
+
     )
   };
 
 
 
-function hidebuttons() {
-  $("#createGroupBTN").hide(),
-    $("#joinGroupBTN").hide(),
-    $("#leaveGroupBTN").show();
-};
+  function hidebuttons() {
+    $("#createGroupBTN").hide(),
+      $("#joinGroupBTN").hide(),
+      $("#leaveGroupBTN").show();
+  };
 
 
-function showbuttons() {
-  $("#createGroupBTN").show(),
-    $("#joinGroupBTN").show(),
-    $("#leaveGroupBTN").hide();
-};
+  function showbuttons() {
+    $("#createGroupBTN").show(),
+      $("#joinGroupBTN").show(),
+      $("#leaveGroupBTN").hide();
+  };
 
 
 
@@ -699,53 +700,12 @@ function showbuttons() {
 
   // Dashboard Logic
   // ---------------------------------------------------------------------
-  var dashboardBody = $("#dashboardBody");
-  // Empty the contents of the dashboard div
-  function createdashboardRow() {
-    $("#dashboardBody").empty();
-
-    var newAppRow = $("<tr>").append(
-      // App image / which is also a link will replace data.x below...
-      $("<td>").text(data.X),
-      // App username, represented by a button, will replace data.y below...
-      $("<td>").text(data.Y),
-      // App password, represented by a button, will replace data.z below...
-      $("<td>").text(data.Z),
-      // Auser who provides the application, will replace data.Name...
-      $("<td>").text(data.Name));
-    return newAppRow;
-  }
-
-  function getAppData() {
-    //  API route will be whatever Jays get request is.
-    $.get("/api/XXXXXX", function (data) {
-      var rowsToAdd = [];
-      for (var i = 0; i < data.length; i++) {
-        rowsToAdd.push(createdashboardRow(data[i]));
-      }
-      renderAuthorList(rowsToAdd);
-    });
-  }
-
-  // A function for rendering the list of authors to the page
-  function fillTable(rows) {
-    $("#dashboardBody").children().not(":last").remove();
-    $("#dashboardBody").children(".alert").remove();
-    if (rows.length) {
-      console.log(rows);
-      $("#dashboardBody").prepend(rows);
-    }
-    else {
-      return
-    }
-  }
 
   var listOfMembers = [];
   var listOfMemberIds = [];
   var listOfApps = [];
   var listOfUN = [];
   var listOfPW = [];
-  var GroupId = 1;
 
   function displayDash(GroupId) {
     $.get("/api/dashboard/" + GroupId).then(function (data) {
@@ -780,10 +740,12 @@ function showbuttons() {
   };
 
   function displayDash2() {
-    console.log(listOfMemberIds);
+    console.log("listOfMemberIds " + listOfMemberIds);
     getUserId(function () {
       for (var k = 0; k < listOfApps.length; k++) {
-        $("#dashboardBody").append(createNewRow(listOfApps[k], listOfUN[k], listOfPW[k], listOfMembers[k]));
+        $("#dashboardBody").append(createNewTableRow(listOfUN[k], listOfPW[k], listOfMembers[k]));
+        addingAppToTable(listOfApps[k]);
+        addInputs(listOfUN[k]);
       };
     })
   };
@@ -816,44 +778,33 @@ function showbuttons() {
       listOfUN.push(data[0].AppUsername);
       listOfPW.push(data[0].AppPassword);
 
-      for (var k = 0; k < listOfApps.length; k++) {
-        $("#dashboardBody").append(createNewRow(listOfApps[k], listOfUN[k], listOfPW[k], listOfMembers[k]));
-      };
+      // for (var k = 0; k < listOfApps.length; k++) {
+      //   $("#dashboardBody").append(createNewTableRow(listOfApps[k], listOfUN[k], listOfPW[k], listOfMembers[k]));
+      // };
 
       displayDash2();
-      
+
     });
   };
 
-  console.log(listOfMembers);
-  console.log(listOfMemberIds);
-  console.log(listOfApps);
-  console.log(listOfUN);
-  console.log(listOfPW);
+  //Needed for the table to work
+  var count = 0;
 
-  displayDash(1);
+  function createNewTableRow(username, password, owner) {
 
-  // $.when(d1).done(function () {
-  //   console.log(listOfMembers);
-  //   console.log(listOfMemberIds);
-  //   console.log("WHY WONT YOU WORK")
-  //   displayDash2();
-  // });
+    count++;
 
-  // $.when(d1).done(function () {
-  //   console.log(listOfMembers);
-  //   console.log(listOfMemberIds);
-  //   console.log("WHY WONT YOU WORK")
-  //   displayDash2();
-  // });
+    //Creating a div for the app
+    var newAppDiv = $("<a id='appLink" + count + "'>");
 
-
-  function createNewRow(appName, username, password, owner) {
+        //Creating a div for the inputs
+    var newInputDiv = $("<input id='username_input" + count + "'>");
+    $("#clipboardStuff").append(newInputDiv);
 
     //Setting Up the Card
     var newAppRow = $("<tr>").append(
       // App image / which is also a link will replace data.x below...
-      $("<td>").text(appName),
+      $("<td>").append(newAppDiv),
       // App username, represented by a button, will replace data.y below...
       $("<td>").text(username),
       // App password, represented by a button, will replace data.z below...
@@ -861,42 +812,61 @@ function showbuttons() {
       // Auser who provides the application, will replace data.Name...
       $("<td>").text(owner));
 
-    // for (var j = 0; j < userId.length; j++) {
-    //   var UserId = userId[j];
-
-    //   console.log(UserId);
-    //   $.get("/api/list_apps/" + UserId).then(function (data) {
-    //     console.log(data);
-    //     switch (data[0].App_name) {
-    //       case "Netflix":
-    //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_netflix_143870.png' alt='Netflix Icon' value='Netflix'>");
-    //         break;
-    //       case "Hulu":
-    //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/hulu-icon.png' alt='Hulu Icon' value='Hulu'>");
-    //         break;
-    //       case "Spotify":
-    //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_Spotify_1298766.png' alt='Spotify Icon' value='Spotify'>");
-    //         break;
-    //       case "HBO":
-    //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/hbo-now-gift-card-taxon.png' alt='HBO Icon' value='HBO'>");
-    //         break;
-    //       case "NyTimes":
-    //         $("#groupDiv" + groupId).append("<img class='groupIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_new_york_times_143900.png' alt='NyTimes Icon' value='NyTimes'>");
-    //         break;
-    //     };
-    //   });
-    // };
-
-
     return newAppRow;
+    
   };
 
+  function addingAppToTable(appName) {
+    switch (appName) {
+      case "Netflix":
+        $("#appLink" + count).append("<a href='https://www.netflix.com/' target='_blank'><img class='linkIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_netflix_143870.png' alt='Netflix Icon' value='Netflix'></a>");
+        break;
+      case "Hulu":
+        $("#appLink" + count).append("<a href='https://www.hulu.com/' target='_blank'><img class='linkIcons rounded-circle' src='stylesheets/img/serviceIcons/hulu-icon.png' alt='Hulu Icon' value='Hulu'></a>");
+        break;
+      case "Spotify":
+        $("#appLink" + count).append("<a href='https://www.spotify.com/us/' target='_blank'><img class='linkIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_Spotify_1298766.png' alt='Spotify Icon' value='Spotify'></a>");
+        break;
+      case "HBO":
+        $("#appLink" + count).append("<a href='https://play.hbonow.com/page/urn:hbo:page:home' target='_blank'><img class='linkIcons rounded-circle' src='stylesheets/img/serviceIcons/hbo-now-gift-card-taxon.png' alt='HBO Icon' value='HBO'></a>");
+        break;
+      case "NyTimes":
+        $("#appLink" + count).append("<a href='https://www.nytimes.com/' target='_blank'><img class='linkIcons rounded-circle' src='stylesheets/img/serviceIcons/iconfinder_new_york_times_143900.png' alt='NyTimes Icon' value='NyTimes'></a>");
+        break;
+    };
+  }
 
+  // ---------------------------------------------------------------------
 
+  // Clipboard Function
 
+  function doCopy(unique) {
+    var msg = "";
 
+    unique.forEach(function (unique) {
+      msg += unique.value;
+    });
 
+    var temp = document.createElement("textarea");
+    var tempMsg = document.createTextNode(msg);
+    temp.appendChild(tempMsg);
 
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    document.body.removeChild(temp);
+    console.log("Success!")
+  };
+
+  //Adding inputs into the frontend
+  function addInputs(username) {
+    // //Creating a div for the inputs
+    // var newInputDiv = $("<input id='username_input" + count + "'>");
+    // $("#clipboardStuff").append(newInputDiv);
+
+    //Adds the value of username
+    $("username_input"+count).val(username);
+  };
 
 
 
