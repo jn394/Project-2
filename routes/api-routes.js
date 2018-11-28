@@ -316,7 +316,31 @@ app.delete("/api/user_data_leave/:UserId", function(req, res) {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 // Dashboard Display
 
+app.get("/api/dashboard/:GroupId", function (req, res) {
+  db.Group.findAll({
+    where: {
+      id: req.params.GroupId
+    },
+    include: [
+      {
+        model: db.User
+      }
+    ]
+  }).then(function (data) {
+    res.json(data);
+  });
+});
 
+//Listing Apps
+app.get("/api/list_apps_dashboard/:memberid", function (req, res) {
+  db.App.findAll({
+    where: {
+      UserId: req.params.memberid
+    }
+  }).then(function (data) {
+    res.json(data);
+  });
+});
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 
