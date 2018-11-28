@@ -141,6 +141,11 @@ nav {
   /* border: 5px solid #212529; */
   
 }
+
+.table th,td {
+  text-align: center;   
+}
+
 /* Buttons */
 /* Create Group */
 #createGroupBTN {

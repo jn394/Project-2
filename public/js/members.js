@@ -4,7 +4,7 @@ $(document).ready(function () {
   $(document).on("click", "#deleteUserBTN", deleteUser);
   $(document).on("click", "#leaveGroupBTN", leaveGroup);
 
-
+  $("#clipboardStuff").hide();
 
   $.get("/api/user_data").then(function (data) {
     $(".member-name").text(data.email);
@@ -743,9 +743,9 @@ $(document).ready(function () {
     console.log("listOfMemberIds " + listOfMemberIds);
     getUserId(function () {
       for (var k = 0; k < listOfApps.length; k++) {
-        $("#dashboardBody").append(createNewTableRow(listOfUN[k], listOfPW[k], listOfMembers[k]));
+        $("#dashboardBody").append(createNewTableRow(listOfMembers[k]));
         addingAppToTable(listOfApps[k]);
-        addInputs(listOfUN[k]);
+        addInputs(listOfUN[k], listOfPW[k]);
       };
     })
   };
@@ -790,30 +790,46 @@ $(document).ready(function () {
   //Needed for the table to work
   var count = 0;
 
-  function createNewTableRow(username, password, owner) {
+  function createNewTableRow(owner) {
 
     count++;
 
     //Creating a div for the app
     var newAppDiv = $("<a id='appLink" + count + "'>");
 
-        //Creating a div for the inputs
-    var newInputDiv = $("<input id='username_input" + count + "'>");
-    $("#clipboardStuff").append(newInputDiv);
+    //Creating a div for the inputs in the frontend
+    var newUNInputDiv = $("<input id='username_input" + count + "'>");
+    $("#clipboardStuff").append(newUNInputDiv);
+
+    //Creating a button for usernames
+    var userUN_BTN = $("<button id='username_BTN" + count + "'>");
+    userUN_BTN.addClass("btn btn-danger");
+    userUN_BTN.addClass("UN-" + count);
+    userUN_BTN.text("Username");
+
+    //Creating a div for the inputs in the frontend
+    var newPWInputDiv = $("<input id='password_input" + count + "'>");
+    $("#clipboardStuff").append(newPWInputDiv);
+
+    //Creating a button for passwords
+    var userPW_BTN = $("<button id='password_BTN" + count + "'>");
+    userPW_BTN.addClass("btn btn-danger");
+    userPW_BTN.addClass("PW-" + count);
+    userPW_BTN.text("Password");
 
     //Setting Up the Card
     var newAppRow = $("<tr>").append(
       // App image / which is also a link will replace data.x below...
       $("<td>").append(newAppDiv),
       // App username, represented by a button, will replace data.y below...
-      $("<td>").text(username),
+      $("<td>").append(userUN_BTN),
       // App password, represented by a button, will replace data.z below...
-      $("<td>").text(password),
+      $("<td>").append(userPW_BTN),
       // Auser who provides the application, will replace data.Name...
       $("<td>").text(owner));
 
     return newAppRow;
-    
+
   };
 
   function addingAppToTable(appName) {
@@ -859,16 +875,84 @@ $(document).ready(function () {
   };
 
   //Adding inputs into the frontend
-  function addInputs(username) {
-    // //Creating a div for the inputs
-    // var newInputDiv = $("<input id='username_input" + count + "'>");
-    // $("#clipboardStuff").append(newInputDiv);
+  function addInputs(username, password) {
 
-    //Adds the value of username
-    $("username_input"+count).val(username);
+    //Adds the value of username to the input
+    $("#username_input" + count).val(username);
+
+    //Adds the value of username to the button
+    $("#username_BTN" + count).val(username);
+
+    //Adds the value of password to the input
+    $("#password_input" + count).val(password);
+
+    //Adds the value of password to the button
+    $("#password_BTN" + count).val(password);
+
+
+    //For the username buttons to work
+    $("#username_BTN1").on("click", function (event) {
+      event.preventDefault();
+      var UserUN = document.querySelectorAll('.UN-1');
+      doCopy(UserUN);
+    });
+
+    $("#username_BTN2").on("click", function (event) {
+      event.preventDefault();
+      var UserUN = document.querySelectorAll('.UN-2');
+      doCopy(UserUN);
+    });
+
+    $("#username_BTN3").on("click", function (event) {
+      event.preventDefault();
+      var UserUN = document.querySelectorAll('.UN-3');
+      doCopy(UserUN);
+    });
+
+    $("#username_BTN4").on("click", function (event) {
+      event.preventDefault();
+      var UserUN = document.querySelectorAll('.UN-4');
+      doCopy(UserUN);
+    });
+
+    $("#username_BTN5").on("click", function (event) {
+      event.preventDefault();
+      var UserUN = document.querySelectorAll('.UN-5');
+      doCopy(UserUN);
+    });
+
+    //For the password buttons to work
+    $("#password_BTN1").on("click", function (event) {
+      event.preventDefault();
+      var UserPW = document.querySelectorAll('.PW-1');
+      doCopy(UserPW);
+    });
+
+    $("#password_BTN2").on("click", function (event) {
+      event.preventDefault();
+      var UserPW = document.querySelectorAll('.PW-2');
+      doCopy(UserPW);
+    });
+
+    $("#password_BTN3").on("click", function (event) {
+      event.preventDefault();
+      var UserPW = document.querySelectorAll('.PW-3');
+      doCopy(UserPW);
+    });
+
+    $("#password_BTN4").on("click", function (event) {
+      event.preventDefault();
+      var UserPW = document.querySelectorAll('.PW-4');
+      doCopy(UserPW);
+    });
+
+    $("#password_BTN5").on("click", function (event) {
+      event.preventDefault();
+      var UserPW = document.querySelectorAll('.PW-5');
+      doCopy(UserPW);
+    });
+
   };
-
-
 
 
 
